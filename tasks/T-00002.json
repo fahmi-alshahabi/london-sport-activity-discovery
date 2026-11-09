@@ -1,0 +1,36 @@
+{
+  "task_id": "T-00002",
+  "task_template_id": "TT-0002",
+  "family": "time_schedule",
+  "suite": "diagnostic",
+  "split": "LOCKED",
+  "query_text": "Does the Westminster leisure centre stay open until 10pm on Fridays?",
+  "constraints": [
+    {
+      "attribute": "borough",
+      "operator": "equals",
+      "value": "Westminster",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "day_of_week",
+      "operator": "equals",
+      "value": "Friday",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "time_of_day",
+      "operator": "at_least",
+      "value": "22:00",
+      "hardness": "hard"
+    }
+  ],
+  "origin": {
+    "borough": "Westminster"
+  },
+  "planted_defect": {
+    "mechanism": "conflicting_values",
+    "expected_state": "indeterminate"
+  },
+  "notes": "Split assigned by seeded grouped random assignment on task_template_id, seed=42, scheme A (DEV+LOCKED; CAL_MODEL and CAL_RISK empty because F-08 calibration is descoped). Assignment followed authoring; no freeze had occurred at that point. Defect not yet planted: DEV vintage not fixed."
+}

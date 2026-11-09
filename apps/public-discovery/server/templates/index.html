@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Find an activity{% endblock %}
+{% block content %}
+<h1>Find an activity</h1>
+<p>Search published activity listings. We show what the data can confirm, and say plainly when it
+   cannot. Missing information is shown as &ldquo;not published&rdquo; &mdash; never as a &ldquo;no&rdquo;.</p>
+
+<form action="/discover" method="get" novalidate>
+  <fieldset>
+    <legend>Your search</legend>
+
+    <div class="field">
+      <label for="activity">Activity</label>
+      <input id="activity" name="activity" type="text" autocomplete="off" value="swimming">
+    </div>
+
+    <div class="field">
+      <label for="access">Access need</label>
+      <select id="access" name="access">
+        <option value="">No preference</option>
+        <option value="step_free" selected>Step-free access</option>
+      </select>
+    </div>
+
+    <fieldset class="scenarios">
+      <legend>Demonstration outcome</legend>
+      <p id="scenhelp" class="hint">This research demo lets you preview each honest outcome state.</p>
+      <div class="radio"><input type="radio" id="s1" name="scenario" value="supported" checked aria-describedby="scenhelp"><label for="s1">Supported match</label></div>
+      <div class="radio"><input type="radio" id="s2" name="scenario" value="no_match"><label for="s2">No listed match</label></div>
+      <div class="radio"><input type="radio" id="s3" name="scenario" value="indeterminate"><label for="s3">Data can&rsquo;t answer</label></div>
+      <div class="radio"><input type="radio" id="s4" name="scenario" value="service_failure"><label for="s4">Service problem</label></div>
+    </fieldset>
+
+    <button type="submit">Search</button>
+  </fieldset>
+</form>
+{% endblock %}

@@ -1,0 +1,817 @@
+{
+  "meta": {
+    "title": "K7 foundation matrix — Clarence's load-bearing reading (WP §18.1 / §18.3, CA-5)",
+    "status": "PROPOSED — citations are a scaffold to verify; attestation columns are Clarence's to complete",
+    "version": "0.1.0-PROPOSED",
+    "authorship_notice": "AI-ASSISTED SCAFFOLD (WP §0). Source identities are drawn from WP §18.1 and are a starting list to VERIFY against the version of record. The 'full_citation_proposed' strings are proposals and may contain errors — confirm each against the publisher record. Every attestation field (DOI, version_of_record.verified, date_accessed, pages, claim_supported, exact_limit, clarence_independent_verdict, new_finding) must be completed by Clarence AFTER personally reading the primary source. The verdict and exact-claim wording are HIS words, not the scaffold's (WP §10, §18.3).",
+    "rules": {
+      "K7_attestation": "A load-bearing source counts as attested only when personally_read=true AND version_of_record.doi is non-empty AND version_of_record.verified=true AND clarence_independent_verdict is non-empty (WP §18.3).",
+      "preprint": "No preprint-only work carries a load-bearing claim where an archival peer-reviewed version of record exists (WP §18.3). If a source is a preprint and load_bearing, set attestation.no_archival_vor_exists=true only if you have confirmed none exists; otherwise cite the version of record.",
+      "per_claim": "K7 attestation is per-claim, not per-theme (CA-5) — bind each row to the specific claim/construct in 'supports'."
+    },
+    "attestation_fields_wp_18_3": [
+      "publication_status_version",
+      "database_or_authority",
+      "version_of_record.doi",
+      "version_of_record.verified",
+      "date_accessed",
+      "sections_pages_read",
+      "claim_supported",
+      "exact_limit_or_non_claim",
+      "clarence_independent_verdict",
+      "new_finding_or_correction",
+      "reviewer",
+      "personally_read"
+    ],
+    "doi_provenance": "High-priority citations + DOIs web-verified against publisher records by Claude, 2026-08-12. version_of_record.verified stays FALSE and personally_read FALSE — Clarence confirms the version of record and records his own verdict on reading (WP §18.3). Double-check FM-15's ACL DOI on the anthology page; FM-14 (NeurIPS) has no DOI — cite the proceedings, not the arXiv preprint."
+  },
+  "sources": [
+    {
+      "source_id": "FM-01",
+      "theme": "Human–AI reliance",
+      "citation_as_given": "Lee & See 2004",
+      "full_citation_proposed": "Lee, J. D., & See, K. A. (2004). Trust in automation: Designing for appropriate reliance. Human Factors, 46(1), 50–80.",
+      "supports": [
+        "CL-1",
+        "L_reliance referent (CA-1 / C-BLOCK-15)",
+        "WP §13 appropriate-reliance design goal"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed journal article (version of record)",
+        "database_or_authority": "SAGE / Human Factors (PubMed 15151155)",
+        "version_of_record": {
+          "doi": "10.1518/hfes.46.1.50_30392",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-02",
+      "theme": "Human–AI reliance",
+      "citation_as_given": "Parasuraman & Riley 1997",
+      "full_citation_proposed": "Parasuraman, R., & Riley, V. (1997). Humans and automation: Use, misuse, disuse, abuse. Human Factors, 39(2), 230–253.",
+      "supports": [
+        "CL-1",
+        "misuse/disuse framing for L_reliance"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed journal article (version of record)",
+        "database_or_authority": "SAGE / Human Factors",
+        "version_of_record": {
+          "doi": "10.1518/001872097778543886",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-03",
+      "theme": "Human–AI reliance",
+      "citation_as_given": "Buçinca et al. 2021",
+      "full_citation_proposed": "Buçinca, Z., Malaya, M. B., & Gajos, K. Z. (2021). To trust or to think: Cognitive forcing functions can reduce overreliance on AI in AI-assisted decision-making. Proc. ACM Hum.-Comput. Interact., 5(CSCW1), Article 188, 21 pp.",
+      "supports": [
+        "CL-1",
+        "cognitive-forcing rationale for confirmation step (C-08)"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed journal/proceedings article (version of record)",
+        "database_or_authority": "ACM Digital Library (PACM HCI, CSCW)",
+        "version_of_record": {
+          "doi": "10.1145/3449287",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-04",
+      "theme": "Human–AI reliance",
+      "citation_as_given": "Bansal et al. 2021",
+      "full_citation_proposed": "Bansal, G., Wu, T., Zhou, J., Fok, R., Nushi, B., Kamar, E., Ribeiro, M. T., & Weld, D. (2021). Does the whole exceed its parts? The effect of AI explanations on complementary team performance. CHI 2021.",
+      "supports": [
+        "CL-1",
+        "CL-2",
+        "explanations can harm as well as help — falsification condition WP §19.4"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed conference paper (version of record)",
+        "database_or_authority": "ACM Digital Library (CHI 2021)",
+        "version_of_record": {
+          "doi": "10.1145/3411764.3445717",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-05",
+      "theme": "Explanation and why/why-not",
+      "citation_as_given": "Tintarev & Masthoff 2012",
+      "full_citation_proposed": "Tintarev, N., & Masthoff, J. (2012). Evaluating the effectiveness of explanations for recommender systems. User Modeling and User-Adapted Interaction, 22(4–5), 399–439.",
+      "supports": [
+        "CL-2",
+        "evidence-card explanation goals (C-11)"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed journal article (version of record)",
+        "database_or_authority": "Springer / UMUAI",
+        "version_of_record": {
+          "doi": "10.1007/s11257-011-9117-5",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-06",
+      "theme": "Explanation and why/why-not",
+      "citation_as_given": "Nunes & Jannach 2017",
+      "full_citation_proposed": "Nunes, I., & Jannach, D. (2017). A systematic review and taxonomy of explanations in decision support and recommender systems. User Modeling and User-Adapted Interaction, 27(3–5), 393–444.",
+      "supports": [
+        "CL-2",
+        "taxonomy for why / why-not surfaces"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed journal article (version of record)",
+        "database_or_authority": "Springer / UMUAI",
+        "version_of_record": {
+          "doi": "10.1007/s11257-017-9195-0",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-07",
+      "theme": "Explanation and why/why-not",
+      "citation_as_given": "Lim et al. 2009",
+      "full_citation_proposed": "Lim, B. Y., Dey, A. K., & Avrahami, D. (2009). Why and why not explanations improve the intelligibility of context-aware intelligent systems. CHI 2009, pp. 2119–2128.",
+      "supports": [
+        "CL-2",
+        "why-not / bounded_non_match presentation"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed conference paper (version of record)",
+        "database_or_authority": "ACM Digital Library (CHI 2009)",
+        "version_of_record": {
+          "doi": "10.1145/1518701.1519023",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-08",
+      "theme": "Uncertainty communication",
+      "citation_as_given": "van der Bles et al. 2019",
+      "full_citation_proposed": "van der Bles, A. M., van der Linden, S., Freeman, A. L. J., Mitchell, J., Galvao, A. B., Zaval, L., & Spiegelhalter, D. J. (2019). Communicating uncertainty about facts, numbers and science. Royal Society Open Science, 6(5), 181870.",
+      "supports": [
+        "CL-2",
+        "render U/B without false precision (INV-NO-COLLAPSE)"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed journal article (version of record; open access)",
+        "database_or_authority": "Royal Society Open Science",
+        "version_of_record": {
+          "doi": "10.1098/rsos.181870",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-09",
+      "theme": "Uncertainty communication",
+      "citation_as_given": "van der Bles et al. 2020",
+      "full_citation_proposed": "van der Bles, A. M., van der Linden, S., Freeman, A. L. J., & Spiegelhalter, D. J. (2020). The effects of communicating uncertainty on public trust in facts and numbers. PNAS, 117(14), 7672–7683.",
+      "supports": [
+        "CL-2",
+        "uncertainty does not automatically reduce trust"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-10",
+      "theme": "Uncertainty communication",
+      "citation_as_given": "MacEachren et al. 2005",
+      "full_citation_proposed": "MacEachren, A. M., Robinson, A., Hopper, S., Gardner, S., Murray, R., Gahegan, M., & Hetzler, E. (2005). Visualizing geospatial information uncertainty: What we know and what we need to know. Cartography and Geographic Information Science, 32(3), 139–160.",
+      "supports": [
+        "CL-2",
+        "spatial uncertainty on map route (C-BLOCK-14)"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-11",
+      "theme": "Uncertainty communication",
+      "citation_as_given": "Kinkeldey et al. 2017",
+      "full_citation_proposed": "Kinkeldey, C., MacEachren, A. M., Riveiro, M., & Schiewe, J. (2017). Evaluating the effect of visually represented geodata uncertainty on decision-making: systematic review, lessons learned, and recommendations. Cartography and Geographic Information Science, 44(1), 1–21. [verify title/venue]",
+      "supports": [
+        "CL-2",
+        "evaluating uncertainty representations"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-12",
+      "theme": "Accessibility and usability",
+      "citation_as_given": "Power et al. 2012",
+      "full_citation_proposed": "Power, C., Freire, A., Petrie, H., & Swallow, D. (2012). Guidelines are only half of the story: Accessibility problems encountered by blind users on the web. CHI 2012, pp. 433–442.",
+      "supports": [
+        "CL-10",
+        "WCAG scanning ≠ experienced accessibility (C-12)"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed conference paper (version of record)",
+        "database_or_authority": "ACM Digital Library (CHI 2012)",
+        "version_of_record": {
+          "doi": "10.1145/2207676.2207736",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-13",
+      "theme": "Accessibility and usability",
+      "citation_as_given": "Petrie & Kheir 2007",
+      "full_citation_proposed": "Petrie, H., & Kheir, O. (2007). The relationship between accessibility and usability of websites. CHI 2007, pp. 397–406.",
+      "supports": [
+        "CL-10",
+        "accessibility/usability overlap"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed conference paper (version of record)",
+        "database_or_authority": "ACM Digital Library (CHI 2007)",
+        "version_of_record": {
+          "doi": "10.1145/1240624.1240688",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-14",
+      "theme": "RAG / claim verification / constrained generation",
+      "citation_as_given": "Lewis et al. 2020",
+      "full_citation_proposed": "Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W., Rocktäschel, T., Riedel, S., & Kiela, D. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. NeurIPS 2020, 33, 9459–9474.",
+      "supports": [
+        "CL-3",
+        "retrieval grounding for C-08; not proof of truth"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed conference proceedings (NeurIPS 2020, vol. 33, pp. 9459–9474) — version of record; no DOI",
+        "database_or_authority": "NeurIPS 2020 Proceedings (Curran Associates); cite the proceedings, not arXiv:2005.11401",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-15",
+      "theme": "RAG / claim verification / constrained generation",
+      "citation_as_given": "Thorne et al. 2018",
+      "full_citation_proposed": "Thorne, J., Vlachos, A., Christodoulopoulos, C., & Mittal, A. (2018). FEVER: a large-scale dataset for fact extraction and VERification. NAACL-HLT 2018, pp. 809–819.",
+      "supports": [
+        "CL-3",
+        "attribution/verification distinct from generation (C-BLOCK-10)"
+      ],
+      "load_bearing": true,
+      "priority": "high",
+      "attestation": {
+        "publication_status_version": "peer-reviewed conference paper (version of record; ACL Anthology N18-1074 — confirm DOI on the anthology page)",
+        "database_or_authority": "ACL Anthology (NAACL-HLT 2018)",
+        "version_of_record": {
+          "doi": "10.18653/v1/N18-1074",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-16",
+      "theme": "RAG / claim verification / constrained generation",
+      "citation_as_given": "Scholak et al. 2021",
+      "full_citation_proposed": "Scholak, T., Schucher, N., & Bahdanau, D. (2021). PICARD: Parsing incrementally for constrained auto-regressive decoding from language models. EMNLP 2021.",
+      "supports": [
+        "CL-3",
+        "constrained decoding rationale for deterministic rendering"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-17",
+      "theme": "RAG / claim verification / constrained generation",
+      "citation_as_given": "Rashkin et al. 2023",
+      "full_citation_proposed": "Rashkin, H., Nikolaev, V., Lamm, M., et al. (2023). Measuring attribution in natural language generation models. Computational Linguistics, 49(4). [verify]",
+      "supports": [
+        "CL-3",
+        "attribution measurement — no unverified token (INV-NO-UNVERIFIED)"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-18",
+      "theme": "RAG / claim verification / constrained generation",
+      "citation_as_given": "Niu et al. 2024",
+      "full_citation_proposed": "Niu, C., et al. (2024). RAGTruth: A hallucination corpus for developing trustworthy retrieval-augmented language models. ACL 2024. [verify — recent; confirm version of record]",
+      "supports": [
+        "CL-3",
+        "hallucination risk motivating verify-before-render"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-19",
+      "theme": "Conversational recommendation",
+      "citation_as_given": "Jannach et al. 2021",
+      "full_citation_proposed": "Jannach, D., Manzoor, A., Cai, W., & Chen, L. (2021). A survey on conversational recommender systems. ACM Computing Surveys, 54(5), Article 105.",
+      "supports": [
+        "CL-3",
+        "CL-7",
+        "C-08 scope + evaluation limits"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-20",
+      "theme": "Conversational recommendation",
+      "citation_as_given": "Jannach 2023",
+      "full_citation_proposed": "Jannach, D. (2023). Evaluating conversational recommender systems: A landscape of research. Artificial Intelligence Review, 56, 2365–2400. [verify title/venue]",
+      "supports": [
+        "CL-7",
+        "evaluation limits for conversational effect (P2−P1)"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-21",
+      "theme": "Human–AI interaction",
+      "citation_as_given": "Amershi et al. 2019",
+      "full_citation_proposed": "Amershi, S., Weld, D., Vorvoreanu, M., et al. (2019). Guidelines for human-AI interaction. CHI 2019.",
+      "supports": [
+        "CL-2",
+        "expectation-setting + failure recovery UX"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-22",
+      "theme": "Human–AI interaction",
+      "citation_as_given": "Ashktorab et al. 2019",
+      "full_citation_proposed": "Ashktorab, Z., Jain, M., Liao, Q. V., & Weisz, J. D. (2019). Resilient chatbots: Repair strategy preferences for conversational breakdowns. CHI 2019.",
+      "supports": [
+        "CL-2",
+        "clarify-not-fabricate repair (C-08)"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-23",
+      "theme": "Visual analytics / dashboard evaluation",
+      "citation_as_given": "Munzner 2009",
+      "full_citation_proposed": "Munzner, T. (2009). A nested model for visualization design and validation. IEEE TVCG, 15(6), 921–928.",
+      "supports": [
+        "CL-4",
+        "validate staff dashboard at the right level"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-24",
+      "theme": "Visual analytics / dashboard evaluation",
+      "citation_as_given": "Lam et al. 2012",
+      "full_citation_proposed": "Lam, H., Bertini, E., Isenberg, P., Plaisant, C., & Carpendale, S. (2012). Empirical studies in information visualization: Seven scenarios. IEEE TVCG, 18(9), 1520–1536.",
+      "supports": [
+        "CL-4",
+        "evaluation scenario selection for staff app"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-25",
+      "theme": "Visual analytics / dashboard evaluation",
+      "citation_as_given": "Sarikaya et al. 2019",
+      "full_citation_proposed": "Sarikaya, A., Correll, M., Bartram, L., Tory, M., & Fisher, D. (2019). What do we talk about when we talk about dashboards? IEEE TVCG, 25(1), 682–692.",
+      "supports": [
+        "CL-4",
+        "dashboard genre + purpose framing (C-07)"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-26",
+      "theme": "Privacy by design / threats",
+      "citation_as_given": "Hoepman 2014",
+      "full_citation_proposed": "Hoepman, J.-H. (2014). Privacy design strategies. IFIP SEC 2014, 446–459.",
+      "supports": [
+        "CL-11",
+        "privacy strategies → concrete controls (C-13)"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-27",
+      "theme": "Privacy by design / threats",
+      "citation_as_given": "LINDDUN peer-reviewed methodology (Section 15)",
+      "full_citation_proposed": "Deng, M., Wuyts, K., Scandariato, R., Preneel, B., & Joosen, W. (2011). A privacy threat analysis framework: supporting the elicitation and fulfillment of privacy requirements. Requirements Engineering, 16(1), 3–32. [confirm this is the LINDDUN source Section 15 cites]",
+      "supports": [
+        "CL-11",
+        "LINDDUN threat elicitation (C-14 privacy/abuse)"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    },
+    {
+      "source_id": "FM-28",
+      "theme": "Prompt injection / security",
+      "citation_as_given": "archival USENIX/CCS sources (Section 08/15)",
+      "full_citation_proposed": "[IDENTIFY] the specific archival USENIX Security / ACM CCS prompt-injection paper(s) named in Section 08/15 — do not leave as a theme cluster (CA-5).",
+      "supports": [
+        "CL-13",
+        "treat retrieved text as untrusted (C-14)"
+      ],
+      "load_bearing": true,
+      "priority": "medium",
+      "attestation": {
+        "publication_status_version": "",
+        "database_or_authority": "",
+        "version_of_record": {
+          "doi": "",
+          "verified": false
+        },
+        "date_accessed": "",
+        "sections_pages_read": "",
+        "claim_supported": "",
+        "exact_limit_or_non_claim": "",
+        "clarence_independent_verdict": "",
+        "new_finding_or_correction": "",
+        "reviewer": "",
+        "personally_read": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+D4 CORPUS RESULTS
+=================
+
+Total corpus records: 737,227
+Searchable records: 724,361
+Excluded records: 12,866
+Providers loaded: 33
+
+
+=== swimming (Aug-Sep) ===
+verdicts: {'supported_match': 5}
+supported_match        pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760741' start='2026-09-06T10:30:00+01:00'
+supported_match        pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760738' start='2026-09-06T10:10:00+01:00'
+supported_match        pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760737' start='2026-09-06T10:50:00+01:00'
+supported_match        pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760740' start='2026-09-06T10:20:00+01:00'
+supported_match        pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760739' start='2026-09-06T11:00:00+01:00'
+
+=== FREE swimming ===
+verdicts: {'bounded_non_match': 5}
+bounded_non_match      pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760741' start='2026-09-06T10:30:00+01:00'
+bounded_non_match      pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760738' start='2026-09-06T10:10:00+01:00'
+bounded_non_match      pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760737' start='2026-09-06T10:50:00+01:00'
+bounded_non_match      pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760740' start='2026-09-06T10:20:00+01:00'
+bounded_non_match      pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760739' start='2026-09-06T11:00:00+01:00'
+
+=== swimming in Camden ===
+verdicts: {'bounded_non_match': 5}
+bounded_non_match      pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760741' start='2026-09-06T10:30:00+01:00'
+bounded_non_match      pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760738' start='2026-09-06T10:10:00+01:00'
+bounded_non_match      pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760737' start='2026-09-06T10:50:00+01:00'
+bounded_non_match      pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760740' start='2026-09-06T10:20:00+01:00'
+bounded_non_match      pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760739' start='2026-09-06T11:00:00+01:00'
+
+=== beginner swimming (indeterminate test) ===
+verdicts: {'evidence_indeterminate': 5}
+evidence_indeterminate pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760741' start='2026-09-06T10:30:00+01:00'
+evidence_indeterminate pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760738' start='2026-09-06T10:10:00+01:00'
+evidence_indeterminate pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760737' start='2026-09-06T10:50:00+01:00'
+evidence_indeterminate pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760740' start='2026-09-06T10:20:00+01:00'
+evidence_indeterminate pref=0.56 name='Swim For All' record_id='https://better-admin.org.uk/api/openactive/better/scheduled-sessions/activity:89760739' start='2026-09-06T11:00:00+01:00'

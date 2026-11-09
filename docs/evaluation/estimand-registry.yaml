@@ -1,0 +1,532 @@
+
+# =====================================================================
+# F-02 — Estimand and Outcome Registry
+# Project: Evidence-Bounded Conversational Activity Discovery (London Sport 1)
+# Owner: Fahmi Alshahabi (benchmark / statistics / evaluation stream)
+# Version: 0.2.0-scope-frozen
+# Date: 2026-09-08
+# Amendment 2026-08-29: arms are presentation-only conditions over one
+#   shared terminal DecisionEnvelope (Michael, 29 Aug: no recommender
+#   exists in any branch). Decision-level estimands are therefore
+#   invariant by construction and cannot carry a between-arm contrast.
+#   §6 H-P restated; §10 clean-room entry deleted (deliverable revived).
+# Amendment 2026-09-08 - SCOPE FREEZE (v0.2.0-scope-frozen):
+#   This is a SPECIFICATION freeze, not a results freeze. No locked run has
+#   executed. Under Michael's 27 Aug fallback, an unexecuted H-P is recorded
+#   unexecuted rather than failed.
+#   Of the 18 open RATIFY values at v0.1.0: 1 closes by a rule already set
+#   (U.superiority_margin), 2 remain genuinely open and IN FORCE
+#   (U.design_weights_v, K.design_weights_v), 1 remains an open external
+#   dependency (L_decision.unacceptable_decision_condition, from Michael's
+#   B0 and partner/workflow meaning), and 14 are marked NOT_IN_FORCE because
+#   the estimand they parameterise is descoped. NOT_IN_FORCE means the value
+#   is not required and no claim depending on it may be made. It does NOT
+#   mean the value was decided.
+#   Descoped at this freeze: Q (ranking utility), F-08 calibration,
+#   H-E, H-G, F-BLOCK-09 application analysis, per-family reporting.
+#   Retained: U (H-P primary endpoint, estimative under CA-01.A9) and K.
+# Status: PROVISIONAL — drafted against the CA-01 vocabulary as permitted
+#   by CA-01 Part 3.4. Becomes reviewable for freeze only after the
+#   CA-01 amendments land in the canonical protocols and RATIFY-19-04
+#   passes. Every numeric threshold below is deliberately RATIFY:
+#   "none may be invented for apparent completeness" (work package,
+#   status notice).
+# Path note: docs/evaluation/ is the §17 candidate layout, pending
+#   architecture ratification with Wesley.
+# Authorship notice: AI-assisted coordination scaffold. Not evidence
+#   that Fahmi authored, read, accepted or completed the work. Fahmi
+#   must inspect and correct it in his own words and obtain scoped
+#   non-author review (F-02 reviewer: Michael).
+# Authority order: 00_CANONICAL_DECISIONS (as amended by CA-01) >
+#   ratified Sections 09-14 > work package > this file.
+# =====================================================================
+
+meta:
+  registry_id: F-02
+  depends_on_amendments: [CA-01.A1, CA-01.A2, CA-01.A5, CA-01.A6, CA-01.A8, F-BLOCK-09]
+  reviewer: michael
+  machine_readable: true
+  units_vocabulary: [task, episode, response, candidate]
+  primary_unit_rule: >
+    The primary unit is the task (or the episode for dialogue outcomes).
+    Nested candidates, claims and turns are never treated as independent
+    tasks unless an estimand explicitly declares them the primary unit.
+
+# ---------------------------------------------------------------------
+# 1. CORE ESTIMANDS (frozen vocabulary per CA-01.A1)
+# ---------------------------------------------------------------------
+estimands:
+
+  K:
+    name: selection_emission_coverage
+    definition: >
+      Proportion of tasks in the declared universe receiving a
+      substantive decision or response (i.e., not abstained/refused),
+      under the frozen design weights.
+    unit: task
+    numerator: tasks_with_substantive_emission
+    denominator: intention_to_evaluate_task_universe
+    weights:
+      design_weights_v: equal_per_template_v1   # CLOSED 2026-09-08 (Fahmi). Every task_template_id carries equal weight over the declared task universe (14 templates). No supply floor is applied (F-03 rules 1), so no supply-based reweighting is justified; per-family weighting is excluded because per-family reporting is descoped (F-03 rules 2).
+    permitted_claims: [coverage_within_declared_universe]
+    prohibited_claims: [population_coverage, londoner_behaviour, between_arm_difference]
+    invariance: >
+      INVARIANT BY CONSTRUCTION (2026-08-29). Arms share one terminal
+      DecisionEnvelope, so emission is identical across arms. Reported once
+      as a system property; never a between-arm contrast.
+    source: [work_package_10.1, CA-01.A1]
+
+  U:
+    name: useful_supported_decision_coverage
+    definition: >
+      The proportion of tasks with a supported decision that receive an
+      assessor-judged useful label, where the denominator is fixed across
+      arms by the shared DecisionEnvelope and only the usefulness judgment
+      varies; U is communication-side, while K carries emission coverage.
+    unit: task
+    role: H-P_primary_endpoint   # single primary under the 2026-08-29 restatement
+    requires_human_judgment: [usefulness]   # soft_relevance removed: Q is no longer an H-P conjunct
+    gold_source: independent_reference_route   # never the treatment verifier
+    analysis_label: adjudicated_label_per_template_arm   # A5(a); Michael arbitrates
+    weights:
+      design_weights_v: equal_per_template_v1   # CLOSED 2026-09-08 (Fahmi). Every task_template_id carries equal weight over the declared task universe (14 templates). No supply floor is applied (F-03 rules 1), so no supply-based reweighting is justified; per-family weighting is excluded because per-family reporting is descoped (F-03 rules 2).
+    superiority_margin: DESIGN_DERIVED_LAST_RESORT   # CLOSED 2026-09-08 by the rule set before the 26 Aug 2026 partner trigger, which passed unanswered. Bound is design-derived from F-06, recorded not re-decided. NOT a pass threshold - see section 6. NO NUMERIC MARGIN CLAIMED: H-P is estimative under CA-01.A9, so no confirmatory superiority threshold is asserted. The F-06 grid is a declared sensitivity range, not a bound. 
+    source: [work_package_10.1, CA-01.A1]
+
+  Q:
+    name: ranking_utility
+    definition: >
+      Graded ranking relevance at frozen depth on the emitted slate;
+      judged episode-level by independent assessors, never supplied by
+      the production ranker. Distinct symbol — U is never reused for
+      ranking (CA-01.A1).
+    unit: task
+    metric_family: nDCG_or_equivalent   # exact metric: NOT_IN_FORCE | NOT_IN_FORCE: Q not collected under the 2026-09-08 scope freeze
+    depth: NOT_IN_FORCE   # first-screen display depth - pending Clarence | NOT_IN_FORCE: Q not collected under the 2026-09-08 scope freeze
+    non_inferiority_margin: NOT_IN_FORCE   # NOT_IN_FORCE: Q not collected under the 2026-09-08 scope freeze
+    status_2026_08_29: >
+      HELD, pending Clarence's definitions of P0/P1/P2. If the conditions are
+      identical in ordering and display depth, Q is invariant by construction
+      and demotes alongside K. If they differ, Q is a secondary estimative
+      outcome and is not an H-P conjunct either way.
+    inferential_status: estimative_or_invariant_pending_clarence
+    source: [work_package_10.1, integrated_proposal_s3]
+
+  R_evidence:
+    name: conditional_evidence_false_assurance_risk
+    definition: >
+      Among emitted decisions, the design-weighted probability of an
+      L_evidence event.
+    unit: task
+    conditioning: emitted_only
+    loss: L_evidence
+    source: [work_package_10.1]
+
+  R_decision:
+    name: conditional_whole_decision_risk
+    definition: >
+      Among emitted decisions, the design-weighted probability of an
+      L_decision event. The H-P risk-gate quantity (CA-01.A2).
+    unit: task
+    conditioning: emitted_only
+    loss: L_decision
+    risk_ceiling: NOT_IN_FORCE   # public false-assurance/harm trade-off — Fahmi cannot decide alone (work package §19) | NOT_IN_FORCE: F-08 calibration descoped 2026-09-08
+    invariance: >
+      INVARIANT BY CONSTRUCTION (2026-08-29). Identical terminal decisions
+      across arms. Retained as an ABSOLUTE certification of the single
+      certified engine against the ratified ceiling; never a between-arm
+      contrast, and no longer an H-P conjunct.
+    source: [work_package_10.1, CA-01.A2]
+
+  H_evidence:
+    name: unconditional_harmful_emission_probability_evidence
+    definition: >
+      Over all tasks (emitted or not), probability of an emitted
+      L_evidence event. COMPUTED DIRECTLY; the identity H = K x R is a
+      reconciliation check only where universes, inclusion rules and
+      weights are identical (CA-01.A5).
+    unit: task
+    computed_directly: true
+    source: [work_package_10.1, CA-01.A5]
+
+  H_decision:
+    name: unconditional_harmful_emission_probability_decision
+    definition: "same_as_H_evidence_with_loss: L_decision"
+    unit: task
+    computed_directly: true
+    invariance: >
+      INVARIANT BY CONSTRUCTION (2026-08-29). Reported once; never a
+      between-arm contrast.
+    source: [work_package_10.1, CA-01.A5]
+
+# ---------------------------------------------------------------------
+# 2. LOSSES (CA-01.A2)
+# ---------------------------------------------------------------------
+losses:
+  L_evidence:
+    definition: >
+      Unsupported catalogue assertion; unsupported mandatory
+      implication; or unjustified bounded non-match.
+    used_by: [H-G, R_evidence, H_evidence]
+  L_decision:
+    definition: >
+      L_evidence OR the independently frozen unacceptable-decision
+      condition.
+    unacceptable_decision_condition: RATIFY   # must be frozen from partner/workflow meaning, never invented here
+    used_by: [H-P, R_decision, H_decision]
+  L_reliance:
+    layer: application_only
+    definition: >
+      Reliance loss occurs when a user's action is unjustified given the
+      terminal DecisionEnvelope evidence state, evaluated against the shared
+      terminal referent rather than the system emission itself. Failure
+      condition: the user acts as though a supported match exists when the
+      terminal state is evidence_indeterminate or bounded_non_match.
+      Under-reliance is deliberately out of scope - declining to act on a
+      supported_match is not evidence of error, since a user may decline for
+      reasons unrelated to evidence. Judged against the terminal state only,
+      never against what the condition displayed.
+    referent: terminal_decision_envelope_evidence_state
+    referent_source: [C-BLOCK-05_section_6, C-BLOCK-15, F-BLOCK-09]
+    used_by: []
+    never_enters: [H-P, H-E, H-G, CAL-RISK, risk_control_of_any_kind]
+    inferential_status: estimative
+    requires_ethics_route: true
+    unmeasured_without_ethics: true
+  reporting_rule: components_always_reported_separately
+
+# ---------------------------------------------------------------------
+# 3. SECONDARY / COMPONENT OUTCOMES
+# ---------------------------------------------------------------------
+secondary_outcomes:
+
+  false_suppression:
+    definition: >
+      Task-level: an evidence-supported useful option existed under the
+      independent reference route but the system suppressed or refused.
+    unit: task
+    disjoint_with: over_refusal
+    gold_source: independent_reference_route
+
+  over_refusal:
+    definition: >
+      Task-level: abstention/refusal where emission was permitted and
+      safe under the frozen rules.
+    unit: task
+
+  correct_abstention:
+    definition: >
+      Abstention where no evidence-supported emission was permitted.
+    unit: task
+
+  supported_fact_completeness:
+    definition: >
+      Of the finite eligible fact set the evidence could support for the
+      task, the proportion delivered in the rendered response.
+    unit: response
+    requires_human_judgment: true
+    role: H-G_non_inferiority_component
+    non_inferiority_margin: NOT_IN_FORCE   # NOT_IN_FORCE: H-G descoped 2026-09-08
+
+  integrated_regret:
+    symbol: IReg
+    definition: >
+      Preference loss over turns versus the theta_true-optimal permitted
+      slate, integrated over the episode; evidence-permitted regret.
+    unit: episode
+    evaluation: simulation_first   # gold typed intents + controlled simulated preference states
+    improvement_margin: NOT_IN_FORCE   # NOT_IN_FORCE: H-E descoped 2026-09-08
+
+  wasted_questions:
+    symbol: W
+    definition: >
+      Questions whose every possible answer changes no permitted slate
+      or gate partition; decomposed by cause into preference_side and
+      observability_side.
+    unit: episode
+    conditioning: questions_asked
+    improvement_margin: NOT_IN_FORCE   # NOT_IN_FORCE: H-E descoped 2026-09-08
+
+  state_transitions:
+    definition: >
+      S0->S1->S1b task-decision transition matrix (weighted); partial
+      identification bounds retained, never collapsed to points.
+    unit: task
+    inferential_status: estimative
+
+# ---------------------------------------------------------------------
+# 3b. APPLICATION-LAYER OUTCOMES (F-BLOCK-09; estimative, never confirmatory)
+# ---------------------------------------------------------------------
+application_outcomes:
+
+  reliance_loss_rate:
+    loss: L_reliance
+    unit: episode
+    conditioning: unrepaired_episodes_only
+    excluded: query_repaired_episodes
+    repair_screen:
+      stage_1_mechanical: >
+        Opening-query envelope digest != terminal envelope digest
+        -> classified repaired, no human judgment.
+        DEPENDS ON: opening-query digest field in event-schema.json,
+        which does not yet exist. Raised with Clarence for the
+        C-BLOCK-05 contract workshop.
+      stage_2_adjudicated: >
+        Digest-equal residual only, judged blind to and before the
+        reliance outcome, on whether the interpreted query changed.
+      blinding_and_order: >
+        Repair status adjudicated and frozen before reliance adjudication;
+        assessors blind to the reliance outcome.
+      screen_audit: >
+        No. The deterministic repair screen is not independently re-audited
+        in the current protocol; recorded as a declared design decision.
+        No screen error rate is reportable.
+    exclusion_rule_declared: pre_declared_never_outcome_dependent
+    contrasts: [P1_vs_P0, P2_vs_P1, W1_vs_W0, W1_vs_W1-NA]
+    inferential_status: estimative
+    requires_human_judgment: true
+    weights:
+      design_weights_v: NOT_IN_FORCE   # NOT_IN_FORCE: F-BLOCK-09 application analysis descoped 2026-09-08
+    permitted_claims: >
+      Reliance loss rate over unrepaired episodes within the declared task
+      universe, at the stated acquisition vintage, under the frozen design
+      weights. Between-condition contrasts are estimative and conditional on
+      the shared terminal DecisionEnvelope referent. No claim extends beyond
+      the episodes adjudicated in this benchmark.
+    prohibited_claims:
+      - no_human_effectiveness_claim_absent_ethics
+      - no_deployment_or_organisational_effectiveness_claim
+      - no_inference_about_attendance_or_health_outcomes
+      - no_demographic_fairness_claim
+      - no_confirmatory_wording
+      - no_safer_by_displaying_less_claim
+
+  query_repair_rate:
+    definition: >
+      Proportion of P2 episodes classified repaired, reported with
+      uncertainty; declares the inference boundary created by the exclusion.
+    unit: episode
+    inferential_status: estimative
+    reported_always: true
+
+# ---------------------------------------------------------------------
+# 4. ABSTENTION MECHANISMS (closed enum; CA-01.A6)
+# ---------------------------------------------------------------------
+abstention_mechanisms:
+  - evidence_required
+  - model_uncertainty
+  - policy_safety
+  - adversarial_containment_retrieval_jamming
+  - collection_scope_limitation
+  - service_failure
+reporting_rule: >
+  Mechanisms are disjoint in reporting; induced refusal under attack is
+  never scored as safe abstention.
+
+# ---------------------------------------------------------------------
+# 5. SYSTEM FAILURE CODES (typed; intention-to-evaluate)
+# ---------------------------------------------------------------------
+failure_codes:
+  - timeout
+  - crash
+  - malformed_output
+rules:
+  - every_assigned_locked_task_stays_in_its_denominator
+  - failures_are_typed_system_failures_not_missing_at_random
+  - no_outcome_dependent_complete_case_deletion
+  - zero_failures_in_both_arms_never_establish_superiority_or_zero_risk
+
+# ---------------------------------------------------------------------
+# 6. CONFIRMATORY DECISION RULES
+# ---------------------------------------------------------------------
+decisions:
+
+  # ===================================================================
+  # ===================================================================
+  H-P:
+    status: estimative_CA-01.A9
+    demoted: 2026-08-29
+    demotion_reason: >
+      F-06 ran 29 Aug and showed that 30-762 templates are needed across the declared sizing range; approximately 24 can be authored, so H-P is demoted to estimative rather than run underpowered.
+    restated: 2026-08-29
+    analysis_primacy: design_based_paired_design_weighted   # per locked Section 2; PENDING CA-01.A8 team ratification; Packet 11 D23 conflicts
+    primary_endpoint: >
+      The primary endpoint is binary usefulness, assessor-judged under
+      F-05 §2, recorded as an adjudicated label with one label per
+      template-arm.
+    primary_contrast: >
+      The primary contrast is [PENDING CLARENCE] versus P0, with the
+      designation fixed in a dated record before outcome inspection.
+    designated_arm: PENDING-CLARENCE
+    decision_rule: >
+      A one-sided test of H0: the paired within-template usefulness
+      difference is at or below zero, at alpha = 0.05. q counts
+      templates, not task rows.
+    delta_role: >
+      δ comes from F-06 and is the effect detected at 0.80 power.
+      It is reported alongside the result and is not a pass condition,
+      because gating on it would halve power against δ itself.
+    not_conjuncts: [Q_non_inferiority, L_decision_risk_gate]
+    superseded_2026_08_29:
+      - U_superiority_over_strongest_eligible_baseline   # "strongest eligible" void: comparator is designated, not selected
+      - Q_non_inferiority                                # Q invariant or estimative; pending Clarence
+      - L_decision_risk_gate                             # invariant by construction; now absolute certification
+    comparator_selection: designated_before_outcome_inspection   # was DEV_only_strongest_eligible
+    limitations:
+      - blinding_impossible_by_construction   # arms differ only in presentation; the presentation is the label
+      - arm_author_assessor_conflict_open     # Clarence authors P0/P1/P2 and assesses all three constructs; C6 at risk if recused
+
+  H-E:
+    status: readiness_gated
+    gates: [posterior_correctness, oracle_checks, policy_parity]
+    conjuncts:
+      - IReg_improvement: {margin: NOT_IN_FORCE}   # NOT_IN_FORCE: H-E descoped 2026-09-08
+      - wasted_question_improvement: {margin: NOT_IN_FORCE}   # NOT_IN_FORCE: H-E descoped 2026-09-08
+      - non_harm_vs_system_risk_ceiling: true
+
+  H-G1:
+    status: readiness_gated
+    conjuncts:
+      - L_evidence_improvement_vs_strongest_of_A1_A2: {margin: NOT_IN_FORCE}   # NOT_IN_FORCE: H-G descoped 2026-09-08
+      - supported_fact_completeness_non_inferiority: {margin: NOT_IN_FORCE}   # NOT_IN_FORCE: H-G descoped 2026-09-08
+  H-G2:
+    status: readiness_gated_descriptive_contrast
+    contrast: A3_vs_A0
+    reported: [assurance, quality, latency, coverage, abstention_cost]
+
+  gate_failure_rule: >
+    A failed readiness gate permits estimative reporting only;
+    confirmatory wording prohibited. H-E/H-G cannot rescue a failed H-P.
+
+# ---------------------------------------------------------------------
+# 7. CONDITION REGISTRIES (pointers; owned elsewhere, frozen with them)
+# ---------------------------------------------------------------------
+conditions:
+  recommender: [B0, B1, B2, B3_offline_only, B4, B5]
+  generation: [A0, A1, A2, A3]
+  applications_public: [P0, P1, P2]
+  applications_staff: [W0, W1, W1-NA]
+  elicitation: DISCREPANCY   # see discrepancy log D-1
+
+# ---------------------------------------------------------------------
+# 8. DISCREPANCY LOG (found while drafting; take to ratification)
+# ---------------------------------------------------------------------
+discrepancies:
+  D-1:
+    where: elicitation_conditions
+    detail: >
+      Work package §4.4 lists SIX elicitation conditions (no question,
+      fixed order, random eligible, uncertainty-only, conventional EVOI,
+      observability-aware EVOI). The integrated proposal's Section 8
+      table lists FIVE (E0-E4, no "random eligible"). The condition set
+      must be frozen to one list before the sizing simulation, since arm
+      count drives assessor effort.
+    disposition: NOT_IN_FORCE   # NOT_IN_FORCE: D-1 feeds H-E; descoped 2026-09-08
+  D-2:
+    where: ranking_utility_metric
+    detail: >
+      "nDCG at frozen depth" appears as an example, not a decision.
+      Exact metric and depth are RATIFY before codebook pilot, since
+      judgment collection depends on them.
+    disposition: NOT_IN_FORCE   # NOT_IN_FORCE: D-2 feeds Q; descoped 2026-09-08
+
+# ---------------------------------------------------------------------
+# 9. RESULT-ROW MINIMUM SCHEMA (every reported number carries these)
+# ---------------------------------------------------------------------
+result_row_schema:
+  - result_id
+  - claim_id
+  - estimand_id
+  - partition
+  - task_universe
+  - primary_unit
+  - system_contrast
+  - operating_point
+  - numerator
+  - denominator
+  - raw_count
+  - weight_factors
+  - effective_sample_size
+  - estimate
+  - interval
+  - interval_method
+  - practical_margin
+  - decision_status
+  - vintage_hash
+  - benchmark_hash
+  - system_hashes
+  - analysis_hash
+  - seed_run_id
+  - open_limitations
+  - permitted_wording
+
+# ---------------------------------------------------------------------
+# 10. DECLARED OUT OF SCOPE (19 August 2026)
+# ---------------------------------------------------------------------
+# These were within the proposal's stated ambition and are NOT delivered.
+# Each is recorded as a dated scope decision with its reason, so that the
+# absence is a declared limitation rather than an undisclosed gap.
+# Declared by Fahmi Alshahabi (evaluation stream). Ratification may revisit
+# any of them; until then they are out of scope and no claim depends on them.
+declared_out_of_scope:
+
+  F-10_hierarchical_bayesian:
+    declared: 2026-08-19
+    scope: >
+      The hierarchical Bayesian secondary analysis is not executed. No
+      hierarchical posterior, prior sensitivity, simulation-based
+      calibration, posterior predictive check or convergence diagnostic
+      is reported.
+    reason: >
+      Locked Section 2 makes the design-weighted finite-benchmark analysis
+      the primary decision instrument. The analysis-primacy conflict raised
+      as CA-01.A8 — Packet 11's D23 proposed the hierarchical posterior as
+      the decision instrument instead — was never resolved by the team, and
+      the readiness conditions for the secondary layer were not met before
+      freeze. Executing an unratified secondary instrument would create two
+      competing analyses with no agreed precedence.
+    consequence: >
+      No partial-pooling, shrinkage or borrowing-of-strength claim is made.
+      All reported quantities come from the design-weighted analysis.
+    reading_released: [R-09, R-10, R-11, R-14]
+
+  F-12_equity_analysis:
+    declared: 2026-08-19
+    scope: >
+      Equity-relevant quantitative analysis is not executed. No subgroup,
+      deprivation-linked or distributional fairness quantity is reported.
+    reason: >
+      Section 22 already prohibits demographic-fairness claims for this
+      design. No approved ethics route exists for participant-level data,
+      and IMD and scenario data do not identify people, so any output would
+      be descriptive of areas rather than of groups and could not support
+      the claim the analysis exists to make.
+    consequence: >
+      No fairness, equity or distributional-impact claim is made at any
+      level. Area-level descriptive context, if reported at all, is labelled
+      as such and carries no fairness interpretation.
+
+  F-14_recommender_review:
+    declared: 2026-08-19
+    scope: >
+      The independent non-author review of the production recommender is
+      not delivered.
+    reason: >
+      No recommender was built. The acquisition stream delivered harvest
+      and snapshot functionality only; there is no production EVOI
+      recommender artefact to review. Confirmed by Michael on 2026-08-29:
+      no recommender exists in any branch, so no superiority comparator is
+      available and the evaluation is an evidence-communication comparison
+      across presentation conditions plus a baseline.
+    consequence: >
+      No claim is made about recommender quality, calibration or behaviour.
+      The evaluation-side recommender estimands remain defined but unused.
+
+# clean_room_reproduction: DELETED 2026-08-29.
+#   The entry claimed no eligible reproducer was ever assigned because the
+#   assessor-eligibility matrix was never ratified. That reason was false:
+#   the matrix was ratified on 19 Aug 2026 (RATIFY-19-03 / RATIFY-19-07).
+#   Michael accepted the non-author reproducer role on 29 Aug 2026
+#   (mechanical re-execution on frozen inputs plus hash comparison, by
+#   17 Sep). The deliverable is revived and is no longer out of scope.
+

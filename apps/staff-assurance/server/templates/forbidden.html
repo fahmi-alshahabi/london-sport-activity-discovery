@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Access restricted{% endblock %}
+{% block content %}
+<h1>Access restricted</h1>
+<p class="notice" role="alert">This staff assurance workbench requires an authorised role. No staff
+   content is shown without it.</p>
+<p>If you are staff, sign in through the authorised route. In this research demonstration a role
+   header is required; real access is controlled by the platform&rsquo;s IAM (Section 16, Wesley).</p>
+<p class="hint">Local demo only: add <code>?role=analyst</code> to the address to preview the
+   workbench &mdash; for example <code>http://127.0.0.1:8000/?role=analyst</code>.</p>
+{% endblock %}

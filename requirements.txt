@@ -1,0 +1,15 @@
+pandas
+numpy
+scikit-learn
+matplotlib
+jupyter
+requests
+
+# C-BLOCK-05 application + assurance runtime (WY-11, Wesley 2026-08-24): without these the Phase B
+# evidence does not reproduce — the certificate checker fails closed indiscriminately (no jsonschema)
+# and the app/test suites cannot import. Pinned to the tested majors.
+jsonschema>=4.0
+fastapi>=0.110
+jinja2>=3.1
+uvicorn>=0.29
+httpx>=0.27

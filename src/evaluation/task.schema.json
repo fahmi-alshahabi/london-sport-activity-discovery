@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/michaelsamuel2005/ls-openactive/schemas/task.schema.json",
+  "title": "London Discovery Benchmark task",
+  "description": "A single frozen benchmark task. Structure only: this schema constrains the SHAPE of a task, never its content or difficulty. Authored task text is out of scope here and gated on the RATIFY-19-06 eligibility decision.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "task_template_id",
+    "family",
+    "suite",
+    "split",
+    "query_text",
+    "constraints",
+    "origin"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^T-[0-9]{5}$",
+      "description": "Unique task identifier, e.g. T-00001."
+    },
+    "task_template_id": {
+      "type": "string",
+      "pattern": "^TT-[0-9]{4}$",
+      "description": "Grouping key for leakage control (F-07 PD-6). All paraphrases and threshold variants of the same underlying question share this id and MUST land in the same split."
+    },
+    "family": {
+      "type": "string",
+      "enum": [
+        "activity_geography",
+        "time_schedule",
+        "price_visibility",
+        "age_information",
+        "accessibility_information",
+        "compound_referral"
+      ],
+      "description": "Query family. Frozen set; adding a family is a protocol change, not a task edit."
+    },
+    "suite": {
+      "type": "string",
+      "enum": ["naturalistic", "diagnostic", "robustness"],
+      "description": "Naturalistic = realistic user tasks. Diagnostic = planted-defect probes. Robustness = paraphrase/injection/defect variants."
+    },
+    "split": {
+      "type": "string",
+      "enum": ["DEV", "CAL_MODEL", "CAL_RISK", "LOCKED"],
+      "description": "Partition assignment (F-07 §5). Assigned by grouped random assignment on task_template_id, seeded, before freeze. ROBUST removed 2026-08-29: it contradicted PD-6, since a paraphrase shares its parent's template and a template sits in exactly one split. Robustness tasks sit in their parent's split."
+    },
+    "query_text": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500,
+      "description": "The task as presented. Frozen at benchmark freeze."
+    },
+    "constraints": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Machine-readable constraints the task states. Each maps to atomic predicates in the evidence gate.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["attribute", "operator", "value", "hardness"],
+        "properties": {
+          "attribute": {
+            "type": "string",
+            "enum": [
+              "activity_type",
+              "borough",
+              "distance_km",
+              "day_of_week",
+              "time_of_day",
+              "price_gbp",
+              "age_range",
+              "accessibility_feature",
+              "audience"
+            ]
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["equals", "less_than", "at_most", "greater_than", "at_least", "within", "one_of"]
+          },
+          "value": {
+            "description": "Scalar or array, per operator. 'one_of' and 'within' take arrays."
+          },
+          "hardness": {
+            "type": "string",
+            "enum": ["hard", "soft"],
+            "description": "Hard constraints route to the evidence gate; soft constraints route to preference utility. A constraint may be reclassified only through the dialogue's must-versus-nice question, never silently."
+          }
+        }
+      }
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["borough"],
+      "properties": {
+        "borough": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 60,
+          "description": "London borough of the sampled origin, spelled exactly as in the frozen geo reference. Amended from LSOA/IMD origin 2026-08-29: no LSOA or IMD file exists on any branch, and deprivation_tertile fed only F-12 equity analysis, which is out of scope."
+        }
+      }
+    },
+    "planted_defect": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Diagnostic suite only. Declares the defect this task probes.",
+      "required": ["mechanism", "expected_state"],
+      "properties": {
+        "mechanism": {
+          "type": "string",
+          "enum": [
+            "missing_field",
+            "conflicting_values",
+            "false_premise",
+            "schedule_exception",
+            "stale_listing",
+            "vocabulary_failure",
+            "projection_loss"
+          ]
+        },
+        "expected_state": {
+          "type": "string",
+          "enum": ["supported", "indeterminate", "bounded_non_match", "scope_indeterminate"],
+          "description": "The evidence state a correct system should reach. Never a relevance judgment."
+        }
+      }
+    },
+    "paraphrase_of": {
+      "type": "string",
+      "pattern": "^T-[0-9]{5}$",
+      "description": "Robustness suite only. The task this one paraphrases. MUST share its task_template_id."
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Author notes. Never shown to assessors."
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "suite": { "const": "diagnostic" } }, "required": ["suite"] },
+      "then": { "required": ["planted_defect"] }
+    },
+    {
+      "if": { "properties": { "suite": { "const": "naturalistic" } }, "required": ["suite"] },
+      "then": { "not": { "required": ["planted_defect"] } }
+    },
+    {
+      "if": { "required": ["paraphrase_of"] },
+      "then": { "properties": { "suite": { "const": "robustness" } } }
+    }
+  ]
+}

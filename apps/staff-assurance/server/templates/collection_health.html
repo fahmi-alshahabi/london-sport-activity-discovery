@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Collection / vintage health{% endblock %}
+{% block content %}
+<h1>Collection / vintage health &mdash; {{ scenario }}</h1>
+<dl>
+  <dt>Acquisition complete</dt><dd>{{ h.acquisition_complete }}</dd>
+  <dt>Unevaluated feeds (denominator)</dt><dd>{{ h.unevaluated_feeds }}</dd>
+  <dt>Statement</dt><dd>{{ h.statement }}</dd>
+  <dt>Vintage</dt><dd>{{ h.vintage }}</dd>
+  <dt>Corpus / interpretation version</dt><dd>{{ h.corpus_version }} / {{ h.interpretation_version }}</dd>
+</dl>
+<p>Provision measures are lower bounds &mdash; absence of data is not absence of activity.</p>
+{% include "_provenance.html" %}
+<p><a href="/?role={{ role or '' }}">Back to workbench</a></p>
+{% endblock %}

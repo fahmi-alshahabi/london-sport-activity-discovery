@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Staff assurance{% endblock %} — Staff assurance (restricted)</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header>
+    <p class="brand">Staff assurance <span class="tag tag-restricted">restricted &middot; research demonstration</span></p>
+    <nav aria-label="Primary">
+      <a href="/?role={{ role or '' }}">Workbench</a>
+      <a href="/help?role={{ role or '' }}">Help</a>
+    </nav>
+    {% if role %}<p class="meta">Signed-in role: {{ role }}</p>{% endif %}
+  </header>
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    <p>Restricted assurance workbench. Authority-asymmetric to the public app but evidence-symmetric:
+       the same certified decision. No league tables, no productivity monitoring, no ad-hoc SQL (WP §8.3).</p>
+  </footer>
+</body>
+</html>

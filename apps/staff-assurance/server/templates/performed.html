@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Transition permitted{% endblock %}
+{% block content %}
+<h1>Transition permitted</h1>
+<p>Role <strong>{{ role }}</strong> may perform <strong>{{ frm }} &rarr; {{ to }}</strong>
+   (capability: {{ capability }}).</p>
+<p class="meta">This demonstration route only checks authorisation &mdash; it does not mutate any
+   record. A real transition also requires the card's evidence and, for review/approval, a reviewer
+   who is not the author.</p>
+<p><a href="/action-card?state={{ frm }}&role={{ role or '' }}">Back to the card</a></p>
+{% endblock %}

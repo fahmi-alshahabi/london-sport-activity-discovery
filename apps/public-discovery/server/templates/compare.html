@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Compare options{% endblock %}
+{% block content %}
+<h1>Compare options</h1>
+{% if matrix.candidates %}
+<p class="meta">Shown in the same certified order as the results. Unknown and conflicting evidence is
+   kept as-is &mdash; there is no overall &ldquo;winner&rdquo;.</p>
+<table>
+  <caption>Evidence per requirement across options</caption>
+  <thead>
+    <tr>
+      <th scope="col">Requirement</th>
+      {% for c in matrix.candidates %}<th scope="col">#{{ c.rank }} {{ c.id }}</th>{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in matrix.rows %}
+    <tr>
+      <th scope="row">{{ row.predicate }}</th>
+      {% for cell in row.cells %}<td>{{ cell }}</td>{% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Nothing to compare for this search.</p>
+{% endif %}
+<p><a href="/discover?scenario={{ scenario }}&amp;condition={{ v.condition }}">Back to results</a></p>
+{% endblock %}

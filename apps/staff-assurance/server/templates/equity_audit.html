@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Equity-relevant audit{% endblock %}
+{% block content %}
+<h1>Equity-relevant audit &mdash; {{ scenario }}</h1>
+<dl>
+  <dt>Area (coarsened origin)</dt><dd>{{ e.coarsened_origin }}</dd>
+  <dt>Scope</dt><dd>{{ e.scope }}</dd>
+  <dt>Unevaluated feeds</dt><dd>{{ e.unevaluated_feeds }}</dd>
+</dl>
+<p class="notice" role="note">{{ e.note }}</p>
+{% include "_provenance.html" %}
+<p><a href="/?role={{ role or '' }}">Back to workbench</a></p>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Ask in your own words{% endblock %}
+{% block content %}
+<h1>Ask in your own words</h1>
+<p>Describe what you&rsquo;re looking for. The assistant interprets your words into a search &mdash; it
+   never invents facts, and if it&rsquo;s unsure it will ask you to confirm. You can always use the
+   <a href="/">guided search</a> instead.</p>
+
+<form action="/chat" method="get" novalidate>
+  <div class="field">
+    <label for="q">What are you looking for?</label>
+    <input id="q" name="q" type="text" autocomplete="off"
+           value="swimming in Croydon with step-free access" size="48">
+  </div>
+  <button type="submit">Ask</button>
+</form>
+{% endblock %}

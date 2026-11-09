@@ -1,0 +1,30 @@
+{
+  "document_id": "C-BLOCK-03-PROVENANCE-CANDIDATE-20260914-v1",
+  "status": "PROPOSED_UNAPPROVED_NOT_FOR_PRODUCTION_RENDERING",
+  "prepared_date": "2026-09-14",
+  "authoring_scope": "Prepared for Clarence with AI assistance. No wording supplied by Fahmi.",
+  "category": "provenance",
+  "CANON_provenance_candidate": [
+    "on_record",
+    "inherited_from_parent"
+  ],
+  "entries": {
+    "on_record": {
+      "label": "Source: this record.",
+      "explanation": "The contributing value or values come from this record. This describes their source, not their evidence grade."
+    },
+    "inherited_from_parent": {
+      "label": "Source: includes inheritance from a parent record.",
+      "explanation": "At least one contributing value is inherited from a parent record. Other contributing values may come from this record. Inheritance does not reduce the evidence grade."
+    }
+  },
+  "review": {
+    "reviewer": "Fahmi",
+    "decision": "PENDING",
+    "approved_at": null,
+    "contract_commit": null,
+    "wording_commit": null,
+    "review_record": null
+  },
+  "integration_note": "Standalone candidate interchange format only; not asserted to match the existing lexicon or linter file layout. Merge the category into the real CANON without replacing other categories, after eligible approval."
+}

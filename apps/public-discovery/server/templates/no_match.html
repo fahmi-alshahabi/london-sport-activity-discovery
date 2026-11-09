@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}No listed match{% endblock %}
+{% block content %}
+<h1>{{ v.terminal_text }}</h1>
+<p class="notice" role="note">
+  {{ v.coverage or "This reflects only the feeds we searched." }}
+  This does not mean no activity exists &mdash; only that nothing in the data we checked matched.
+</p>
+<p>You could relax one of your filters, or get assistance.</p>
+<p class="actions">
+  <a class="button" href="/">Change your search</a>
+  <a class="button" href="/help">Get assistance</a>
+</p>
+{% endblock %}

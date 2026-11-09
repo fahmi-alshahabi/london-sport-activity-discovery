@@ -1,0 +1,30 @@
+{
+  "task_id": "T-00012",
+  "task_template_id": "TT-0012",
+  "family": "compound_referral",
+  "suite": "diagnostic",
+  "split": "LOCKED",
+  "query_text": "Does the Brent leisure centre still offer swimming lessons and have free parking?",
+  "constraints": [
+    {
+      "attribute": "borough",
+      "operator": "equals",
+      "value": "Brent",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "activity_type",
+      "operator": "equals",
+      "value": "swimming_lessons",
+      "hardness": "hard"
+    }
+  ],
+  "origin": {
+    "borough": "Brent"
+  },
+  "planted_defect": {
+    "mechanism": "stale_listing",
+    "expected_state": "indeterminate"
+  },
+  "notes": "Split assigned by seeded grouped random assignment on task_template_id, seed=42, scheme A (DEV+LOCKED; CAL_MODEL and CAL_RISK empty because F-08 calibration is descoped). Assignment followed authoring; no freeze had occurred at that point. Defect not yet planted: DEV vintage not fixed."
+}

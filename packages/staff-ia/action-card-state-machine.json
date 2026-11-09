@@ -1,0 +1,39 @@
+{
+  "_comment": "AI-ASSISTED SCAFFOLD from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md sec 8.5 (canonical action-card workflow) and Section 18. NOT authorship evidence. Clarence corrects it in his own words; Section 18 owner + partner route confirm it. No chart, alert, threshold, model or staff assistant may skip approval (WP 8.5).",
+  "version": "0.1.0-PROPOSED",
+  "status": "PROPOSED",
+  "canonical_states": [
+    "observed", "investigated", "drafted", "independently_reviewed",
+    "approved_for_route", "sent_by_authorised_role", "monitored", "closed_or_withdrawn"
+  ],
+  "side_states": ["hold", "rejected", "withdrawn", "returned_for_more_evidence"],
+  "gates": {
+    "requires_independent_review_before": "approved_for_route",
+    "requires_authorised_role_for": "sent_by_authorised_role",
+    "correction_token_may_only_create": "observed",
+    "no_skip": "No transition may reach approved_for_route or sent_by_authorised_role without passing independently_reviewed then approved_for_route."
+  },
+  "transitions": [
+    { "from": "observed", "to": "investigated", "trigger": "triage" },
+    { "from": "investigated", "to": "drafted", "trigger": "draft action card" },
+    { "from": "drafted", "to": "independently_reviewed", "trigger": "non-author review", "requires_non_author_review": true },
+    { "from": "drafted", "to": "returned_for_more_evidence", "trigger": "insufficient evidence" },
+    { "from": "independently_reviewed", "to": "approved_for_route", "trigger": "approve", "requires_non_author_review": true },
+    { "from": "independently_reviewed", "to": "rejected", "trigger": "reject" },
+    { "from": "approved_for_route", "to": "sent_by_authorised_role", "trigger": "send", "requires_authorised_role": true },
+    { "from": "approved_for_route", "to": "hold", "trigger": "hold" },
+    { "from": "sent_by_authorised_role", "to": "monitored", "trigger": "await outcome" },
+    { "from": "monitored", "to": "closed_or_withdrawn", "trigger": "close" },
+    { "from": "returned_for_more_evidence", "to": "investigated", "trigger": "resume" },
+    { "from": "hold", "to": "approved_for_route", "trigger": "release hold" },
+    { "from": "hold", "to": "withdrawn", "trigger": "withdraw" },
+    { "from": "rejected", "to": "closed_or_withdrawn", "trigger": "close" },
+    { "from": "withdrawn", "to": "closed_or_withdrawn", "trigger": "close" }
+  ],
+  "correction_token": { "creates": "observed", "may_mutate_evidence": false, "may_contact_publisher": false },
+  "card_fields_required": [
+    "action_class", "vintage", "denominator", "receipt", "mechanism",
+    "affected_records", "replay_or_bounded_effect", "unresolved_assumptions",
+    "permitted_wording", "proposed_role", "current_state", "review_evidence"
+  ]
+}

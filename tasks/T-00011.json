@@ -1,0 +1,30 @@
+{
+  "task_id": "T-00011",
+  "task_template_id": "TT-0011",
+  "family": "accessibility_information",
+  "suite": "diagnostic",
+  "split": "LOCKED",
+  "query_text": "Can I use the accessible pool entrance at the Haringey centre during the bank holiday?",
+  "constraints": [
+    {
+      "attribute": "borough",
+      "operator": "equals",
+      "value": "Haringey",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "accessibility_feature",
+      "operator": "equals",
+      "value": "accessible_entrance",
+      "hardness": "hard"
+    }
+  ],
+  "origin": {
+    "borough": "Haringey"
+  },
+  "planted_defect": {
+    "mechanism": "schedule_exception",
+    "expected_state": "indeterminate"
+  },
+  "notes": "Split assigned by seeded grouped random assignment on task_template_id, seed=42, scheme A (DEV+LOCKED; CAL_MODEL and CAL_RISK empty because F-08 calibration is descoped). Assignment followed authoring; no freeze had occurred at that point. Defect not yet planted: DEV vintage not fixed."
+}

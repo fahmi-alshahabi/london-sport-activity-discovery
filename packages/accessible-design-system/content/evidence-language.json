@@ -1,0 +1,65 @@
+{
+  "_comment": "AI-ASSISTED SCAFFOLD from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md sec 4.2 (states), 7.3/7.4 (public prohibitions + evidence card), 9.3 (UX distinctions), 11.1/11.4 (accessibility claim discipline, plain English), 19.3 (prohibited claims). NOT authorship evidence; Clarence must correct wording in his own words and obtain a non-author HCI/content review (C-BLOCK-03). Design goal: APPROPRIATE RELIANCE, not maximum trust or persuasion (WP 7.4).",
+  "version": "0.1.0-PROPOSED",
+  "status": "PROPOSED",
+  "principle": "The interface may simplify but may never strengthen a claim. Missing evidence is never rendered as a negative fact. Uncertainty and abstention are actionable, not hidden.",
+
+  "evidence_state": {
+    "T": { "approved": ["confirmed", "published as", "the provider states"], "banned": [], "guidance": "State the confirmed fact plainly; pair with its grade." },
+    "F": { "approved": ["not offered (published)", "the provider states this is not available", "does not meet"], "banned": ["unknown", "not published"], "guidance": "A PUBLISHED contradiction. Must be distinguishable from unknown — do not soften F into 'not stated'." },
+    "U": { "approved": ["not published", "not stated by the provider", "we don't know from the data"], "banned": ["no", "none", "not available", "free", "0", "inaccessible", "unavailable", "false"], "guidance": "Missing evidence is NOT a negative fact (WP 4.2). Never render U as a definite value or a 'no'." },
+    "B": { "approved": ["sources disagree", "conflicting information published"], "banned": ["yes", "no", "confirmed", "not published"], "guidance": "Show the conflict; never resolve it in the UI by picking a side (WP 4.2)." }
+  },
+
+  "grade": {
+    "explicit": { "approved": ["published by the provider"], "banned": [], "guidance": "Strongest grade." },
+    "schedule_derived": { "approved": ["derived from the published schedule"], "banned": ["confirmed time", "guaranteed"], "guidance": "Visibly weaker than explicit; implies no capacity, booking or cancellation status (WP proposal §3 evidence grades)." },
+    "specification_default": { "approved": ["assumed from the standard's default"], "banned": ["published", "confirmed"], "guidance": "Weakest; must be flagged as a default, never shown as a provider fact." }
+  },
+
+  "terminal_decision": {
+    "supported_match": { "approved": ["Matches your confirmed needs", "Meets the requirements you confirmed"], "banned": ["best for you", "guaranteed suitable", "perfect match", "recommended just for you"], "guidance": "State WHAT is supported and by what evidence; never assert suitability beyond the evidence (WP 7.3)." },
+    "bounded_non_match": { "approved": ["No listed match in what we searched", "Nothing in the data we checked matches"], "banned": ["nothing exists", "no activities available", "there are none", "no activity near you"], "required_qualifier": "coverage", "guidance": "'No observed listed match' is never 'no activity exists' (WP 4.2). Must carry the acquisition-coverage qualifier." },
+    "evidence_indeterminate": { "approved": ["We can't tell from the available data", "The data can't answer this"], "banned": ["no results", "nothing found", "no match"], "guidance": "Distinct from bounded_non_match and from service failure (WP 9.3)." }
+  },
+
+  "scope_qualifier": {
+    "scope_complete": { "approved": ["across all feeds we searched"], "banned": [], "guidance": "Only when acquisition genuinely complete for the stated scope." },
+    "scope_indeterminate": { "approved": ["some feeds or areas weren't fully checked", "results may be incomplete"], "banned": ["complete", "all activities", "everything available"], "guidance": "Never hide a scope limit because one match exists (WP 7.3)." }
+  },
+
+  "recommendation_action": {
+    "authorised_slate": { "approved": ["Suggested order", "Ordered by fit to your confirmed preferences"], "banned": ["the best", "top pick", "guaranteed"], "guidance": "Ordering reflects confirmed preferences only; expose which ones affected order (WP 7.4)." },
+    "model_abstained": { "approved": ["We didn't rank these automatically", "Automatic ranking was not applied here"], "banned": ["no recommendations", "no results", "nothing matched"], "guidance": "Model abstention is NOT evidence indeterminacy and NOT 'no match' (WP 4.2, 9.3). Offer the deterministic/browse route." },
+    "deterministic_fallback": { "approved": ["Showing a basic guided result", "Standard results without automatic ranking"], "banned": ["error", "no results"], "guidance": "A designed fallback, not a failure." },
+    "browse_only": { "approved": ["Browse results", "Other options that meet your must-haves (not a recommendation)"], "banned": ["recommended for you", "best options"], "guidance": "Label as browse; never present as a model recommendation (WP 4.2)." }
+  },
+
+  "global_banned": [
+    "best for you", "guaranteed", "guaranteed suitable", "perfect", "safe", "fully accessible",
+    "accessible to everyone", "secure", "private", "compliant", "trustworthy", "the only",
+    "first ever", "state-of-the-art", "production-ready", "cheapest", "fastest", "you will love"
+  ],
+  "conditional_terms": {
+    "accessible": "Only as 'accessibility information published' or 'step-free access stated'; never as a blanket 'accessible' claim (WP 11.1).",
+    "free": "Only when a structured price/offer is explicitly published as 0; never when price evidence_state is U.",
+    "available": "Only for explicitly published availability; never inferred from a schedule."
+  },
+  "required_rules": [
+    { "id": "R-U-not-negative", "desc": "A predicate in state U must not be rendered with any of its banned terms (no/none/free/0/inaccessible/...)." },
+    { "id": "R-B-shows-conflict", "desc": "A predicate in state B must render as a conflict, not a resolved value." },
+    { "id": "R-no-collapse-claim", "desc": "No definite listing_attribute claim may be rendered over a predicate whose state is U or B (mirrors INV-NO-COLLAPSE)." },
+    { "id": "R-bnm-coverage", "desc": "bounded_non_match rendering must include an acquisition-coverage qualifier." },
+    { "id": "R-abstain-not-nomatch", "desc": "model_abstained must not be worded as 'no results'/'no match'." },
+    { "id": "R-scope-visible", "desc": "scope_indeterminate must be surfaced even when a match exists." }
+  ],
+  "accessibility_language": {
+    "claim": "Target 'WCAG 2.2 AA conformance in named tested routes/environments' — never 'fully accessible' or 'accessible to everyone' (WP 11.1).",
+    "rules": [
+      "Plain English; define any technical term at first use.",
+      "No colour-only meaning in wording (don't say 'the red ones').",
+      "Every evidence state has a text equivalent independent of icon/colour.",
+      "Error and recovery messages say what happened and the next safe action."
+    ]
+  }
+}

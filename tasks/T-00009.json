@@ -1,0 +1,45 @@
+{
+  "task_id": "T-00009",
+  "task_template_id": "TT-0009",
+  "family": "price_visibility",
+  "suite": "diagnostic",
+  "split": "DEV",
+  "query_text": "Is swimming at the Hammersmith leisure centre £4 or £5 for adults?",
+  "constraints": [
+    {
+      "attribute": "borough",
+      "operator": "equals",
+      "value": "Hammersmith & Fulham",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "activity_type",
+      "operator": "equals",
+      "value": "swimming",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "audience",
+      "operator": "equals",
+      "value": "adult",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "price_gbp",
+      "operator": "one_of",
+      "value": [
+        4,
+        5
+      ],
+      "hardness": "soft"
+    }
+  ],
+  "origin": {
+    "borough": "Hammersmith & Fulham"
+  },
+  "planted_defect": {
+    "mechanism": "conflicting_values",
+    "expected_state": "indeterminate"
+  },
+  "notes": "Split assigned by seeded grouped random assignment on task_template_id, seed=42, scheme A (DEV+LOCKED; CAL_MODEL and CAL_RISK empty because F-08 calibration is descoped). Assignment followed authoring; no freeze had occurred at that point. Defect not yet planted: DEV vintage not fixed."
+}

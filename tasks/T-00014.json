@@ -1,0 +1,36 @@
+{
+  "task_id": "T-00014",
+  "task_template_id": "TT-0014",
+  "family": "time_schedule",
+  "suite": "diagnostic",
+  "split": "LOCKED",
+  "query_text": "Which Newham leisure centres are open after 9pm and have a pool?",
+  "constraints": [
+    {
+      "attribute": "borough",
+      "operator": "equals",
+      "value": "Newham",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "activity_type",
+      "operator": "equals",
+      "value": "swimming",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "time_of_day",
+      "operator": "greater_than",
+      "value": "21:00",
+      "hardness": "hard"
+    }
+  ],
+  "origin": {
+    "borough": "Newham"
+  },
+  "planted_defect": {
+    "mechanism": "projection_loss",
+    "expected_state": "scope_indeterminate"
+  },
+  "notes": "Split assigned by seeded grouped random assignment on task_template_id, seed=42, scheme A (DEV+LOCKED; CAL_MODEL and CAL_RISK empty because F-08 calibration is descoped). Assignment followed authoring; no freeze had occurred at that point. Defect not yet planted: DEV vintage not fixed."
+}

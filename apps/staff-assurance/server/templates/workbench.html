@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Workbench{% endblock %}
+{% block content %}
+<h1>Assurance workbench</h1>
+<p>Restricted staff view. Every panel shows its provenance (universe, denominator, vintage, versions)
+   and its permitted wording. This view can diagnose and draft; it cannot change evidence or send an
+   action without independent review and an authorised role.</p>
+
+<h2>Workspaces</h2>
+<ul class="workspaces">
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/replay?scenario=supported&role={{ role or '' }}">Public-state replay</a></h3>
+    <p class="wcard-desc">Reconstruct exactly what the public user received.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/failure-chain?scenario=indeterminate&role={{ role or '' }}">Failure-chain explorer</a></h3>
+    <p class="wcard-desc">Where an outcome became limited.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/collection-health?scenario=indeterminate&role={{ role or '' }}">Collection / vintage health</a></h3>
+    <p class="wcard-desc">Denominators and freshness.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/action-card?state=drafted&role={{ role or '' }}">Action-card workflow</a></h3>
+    <p class="wcard-desc">Governed next steps, with separated review, approval and send.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/bounded-scenario?scenario=indeterminate&role={{ role or '' }}">Bounded scenario laboratory</a></h3>
+    <p class="wcard-desc">Best- and worst-case bounds.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/recommender-assurance?scenario=supported&role={{ role or '' }}">Recommender / AI assurance</a></h3>
+    <p class="wcard-desc">Within the frozen envelope.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/equity-audit?scenario=indeterminate&role={{ role or '' }}">Equity-relevant audit</a></h3>
+    <p class="wcard-desc">Contextual, not identity.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/release-incident?scenario=supported&role={{ role or '' }}">Release / incident control</a></h3>
+    <p class="wcard-desc">Maturity and controls.</p>
+  </li>
+</ul>
+
+<h2>Scenarios</h2>
+<ul class="chips">
+  {% for s in scenarios %}<li>{{ s }}</li>{% endfor %}
+</ul>
+{% endblock %}

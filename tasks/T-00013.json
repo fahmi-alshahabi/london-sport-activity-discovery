@@ -1,0 +1,30 @@
+{
+  "task_id": "T-00013",
+  "task_template_id": "TT-0013",
+  "family": "activity_geography",
+  "suite": "diagnostic",
+  "split": "DEV",
+  "query_text": "Where can I find a lido-style outdoor swim in Richmond?",
+  "constraints": [
+    {
+      "attribute": "borough",
+      "operator": "equals",
+      "value": "Richmond upon Thames",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "activity_type",
+      "operator": "equals",
+      "value": "outdoor_swimming",
+      "hardness": "hard"
+    }
+  ],
+  "origin": {
+    "borough": "Richmond upon Thames"
+  },
+  "planted_defect": {
+    "mechanism": "vocabulary_failure",
+    "expected_state": "scope_indeterminate"
+  },
+  "notes": "Split assigned by seeded grouped random assignment on task_template_id, seed=42, scheme A (DEV+LOCKED; CAL_MODEL and CAL_RISK empty because F-08 calibration is descoped). Assignment followed authoring; no freeze had occurred at that point. Defect not yet planted: DEV vintage not fixed."
+}

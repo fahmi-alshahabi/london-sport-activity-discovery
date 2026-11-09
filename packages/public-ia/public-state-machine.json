@@ -1,0 +1,58 @@
+{
+  "_comment": "AI-ASSISTED SCAFFOLD from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md sec 4.3, 7.1, 7.2, 9.3. NOT authorship evidence. Clarence must correct it in his own words and obtain non-author HCI review (RATIFY-14-05, C-BLOCK-03). Coverage is checked against the C-BLOCK-05 contract enums by validate_ia.py.",
+  "version": "0.1.0-PROPOSED",
+  "status": "PROPOSED",
+  "routes": {
+    "guided_search": { "required": true, "chat_free": true, "map_free": true, "desc": "Accessible structured guided search (§7.1.1)." },
+    "conversational": { "required": true, "chat_free": false, "map_free": true, "desc": "Conversational discovery (§7.1.2); never the only route." },
+    "browse_list": { "required": true, "chat_free": true, "map_free": true, "desc": "Browse/list without a personal profile (§7.1.3)." },
+    "map": { "required": false, "chat_free": true, "map_free": false, "desc": "Optional secondary map view (§7.1.4); list is authoritative." },
+    "compare": { "required": true, "chat_free": true, "map_free": true, "desc": "Compare view retaining unknown/conflict (§7.1.5)." },
+    "detail_receipt": { "required": true, "chat_free": true, "map_free": true, "desc": "Result detail + privacy-minimised evidence receipt (§7.1.6)." },
+    "handoff": { "required": true, "chat_free": true, "map_free": true, "desc": "Printable, assisted, telephone-compatible provider handoff (§7.1.8)." }
+  },
+  "fallback_guarantees": {
+    "non_chat_route": true,
+    "non_map_route": true,
+    "no_js_core": true,
+    "comment": "Essential content/actions work without chat, without map, and without JavaScript (C-BLOCK-11/14)."
+  },
+  "screens": [
+    { "id": "start_scope", "route": "guided_search", "user_question": "What can this service do?", "min_obligation": "Explain catalogue, AI and non-clinical boundary; expose non-chat/help route.", "covers": {} },
+    { "id": "query_review", "route": "guided_search", "user_question": "Did it understand me?", "min_obligation": "Show editable hard/soft constraints and confirmation status.", "covers": { "action_kind": "parse_clarification" } },
+    { "id": "clarify_preference", "route": "conversational", "user_question": "Why is it asking?", "min_obligation": "State it is a preference question, the budget, and why it can help.", "covers": { "action_kind": "preference_clarification" } },
+    { "id": "clarify_evidence", "route": "guided_search", "user_question": "Why can't it answer?", "min_obligation": "Explain the catalogue blocker and whether a user answer can change anything.", "covers": { "action_kind": "evidence_clarification" } },
+    { "id": "recommended_slate", "route": "guided_search", "user_question": "What is recommended?", "min_obligation": "Show only the authorised slate; expose scope, freshness, evidence and model abstention.", "covers": { "action_kind": "discovery_decision", "terminal_decision": "supported_match", "recommendation_action": "authorised_slate" } },
+    { "id": "supported_browse", "route": "browse_list", "user_question": "What else meets my must-haves?", "min_obligation": "Label as browse, not recommendation; honour fallback policy.", "covers": { "recommendation_action": "browse_only" } },
+    { "id": "ranking_not_applied", "route": "guided_search", "user_question": "Why no ranking?", "min_obligation": "Say ranking was not applied; offer the deterministic/browse route. Not 'no match'.", "covers": { "recommendation_action": "model_abstained" } },
+    { "id": "basic_results", "route": "guided_search", "user_question": "What can I still see?", "min_obligation": "Show standard guided results without automatic ranking.", "covers": { "recommendation_action": "deterministic_fallback" } },
+    { "id": "no_match", "route": "guided_search", "user_question": "Is there really nothing?", "min_obligation": "State no listed match within the searched coverage; carry the coverage qualifier; offer to relax.", "covers": { "terminal_decision": "bounded_non_match" } },
+    { "id": "cannot_answer", "route": "guided_search", "user_question": "Can the data answer this?", "min_obligation": "State the data cannot answer; explain why; offer assisted route. Distinct from no-match and failure.", "covers": { "terminal_decision": "evidence_indeterminate" } },
+    { "id": "scope_notice", "route": "guided_search", "user_question": "How complete is this?", "min_obligation": "Surface incomplete collection/area/horizon even when a match exists.", "covers": { "scope_qualifier": "scope_indeterminate" } },
+    { "id": "service_failure", "route": "guided_search", "user_question": "Something went wrong — now what?", "min_obligation": "State the failed stage and a safe retry/fallback/handoff; never reuse stale content silently.", "covers": { "action_kind": "service_failure" } },
+    { "id": "detail_receipt", "route": "detail_receipt", "user_question": "Why was this shown?", "min_obligation": "Confirmed evidence, important limitations, ordering explanation, source/vintage, next step.", "covers": {} },
+    { "id": "compare", "route": "compare", "user_question": "How do options differ?", "min_obligation": "Retain unknown/conflict cells; never invent a composite winner.", "covers": {} },
+    { "id": "handoff", "route": "handoff", "user_question": "How do I continue or challenge?", "min_obligation": "Provider-controlled next step; assisted option; minimal correction token.", "covers": {} }
+  ],
+  "transitions": [
+    { "from": "start_scope", "to": "query_review", "trigger": "user submits query" },
+    { "from": "query_review", "to": "query_review", "trigger": "parse_clarification (edit)" },
+    { "from": "query_review", "to": "clarify_preference", "trigger": "preference question useful" },
+    { "from": "query_review", "to": "clarify_evidence", "trigger": "evidence blocker" },
+    { "from": "clarify_preference", "to": "recommended_slate", "trigger": "answered/skipped" },
+    { "from": "query_review", "to": "recommended_slate", "trigger": "supported_match + authorised_slate" },
+    { "from": "query_review", "to": "supported_browse", "trigger": "browse_only" },
+    { "from": "query_review", "to": "ranking_not_applied", "trigger": "model_abstained" },
+    { "from": "query_review", "to": "basic_results", "trigger": "deterministic_fallback" },
+    { "from": "query_review", "to": "no_match", "trigger": "bounded_non_match" },
+    { "from": "query_review", "to": "cannot_answer", "trigger": "evidence_indeterminate" },
+    { "from": "query_review", "to": "service_failure", "trigger": "component failure" },
+    { "from": "recommended_slate", "to": "detail_receipt", "trigger": "open a result" },
+    { "from": "recommended_slate", "to": "compare", "trigger": "compare options" },
+    { "from": "recommended_slate", "to": "scope_notice", "trigger": "scope_indeterminate present" },
+    { "from": "detail_receipt", "to": "handoff", "trigger": "continue to provider" },
+    { "from": "service_failure", "to": "query_review", "trigger": "retry (fresh; no stale reuse)" },
+    { "from": "service_failure", "to": "handoff", "trigger": "assisted handoff" }
+  ],
+  "no_stale_after_failure": true
+}

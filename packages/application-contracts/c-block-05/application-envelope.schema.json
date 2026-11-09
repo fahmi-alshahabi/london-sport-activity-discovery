@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ls-openactive/contracts/c-block-05/application-envelope.schema.json",
+  "title": "ApplicationEnvelope",
+  "version": "0.1.0-PROPOSED",
+  "$comment": "AI-ASSISTED SCAFFOLD from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md sec 4.3. NOT authorship evidence; Clarence must inspect, correct in his own words and obtain non-author review. action_kind vocabulary and header fields are PROPOSED and bind to RATIFY-14-04 with Michael (evidence semantics) and Wesley (transport/version/auth) before freeze.",
+  "description": "Versioned discriminated union the client consumes. Every variant shares a common header. Only the discovery_decision variant carries a terminal DecisionEnvelope. A clarification or failure variant must NEVER fabricate an evidence result.",
+  "type": "object",
+  "required": ["header", "action_kind", "payload"],
+  "additionalProperties": false,
+  "properties": {
+    "header": { "$ref": "#/$defs/header" },
+    "action_kind": {
+      "enum": ["parse_clarification", "preference_clarification", "evidence_clarification", "discovery_decision", "service_failure"],
+      "x-release-class": "PUBLIC_SAFE"
+    },
+    "payload": { "type": "object" }
+  },
+  "oneOf": [
+    {
+      "title": "parse_clarification",
+      "properties": {
+        "action_kind": { "const": "parse_clarification" },
+        "payload": { "$ref": "#/$defs/parse_clarification" }
+      }
+    },
+    {
+      "title": "preference_clarification",
+      "properties": {
+        "action_kind": { "const": "preference_clarification" },
+        "payload": { "$ref": "#/$defs/preference_clarification" }
+      }
+    },
+    {
+      "title": "evidence_clarification",
+      "properties": {
+        "action_kind": { "const": "evidence_clarification" },
+        "payload": { "$ref": "#/$defs/evidence_clarification" }
+      }
+    },
+    {
+      "title": "discovery_decision",
+      "properties": {
+        "action_kind": { "const": "discovery_decision" },
+        "payload": { "$ref": "#/$defs/discovery_decision" }
+      }
+    },
+    {
+      "title": "service_failure",
+      "properties": {
+        "action_kind": { "const": "service_failure" },
+        "payload": { "$ref": "#/$defs/service_failure" }
+      }
+    }
+  ],
+  "$defs": {
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "episode_id", "turn_id", "request_id", "trace_id",
+        "schema_version", "compatible_release_version",
+        "state_transition", "release_maturity_class"
+      ],
+      "properties": {
+        "episode_id": { "type": "string", "x-release-class": "RESEARCH_RESTRICTED" },
+        "turn_id": { "type": "integer", "minimum": 0, "x-release-class": "STAFF_AGGREGATE" },
+        "request_id": { "type": "string", "x-release-class": "STAFF_EVIDENCE" },
+        "trace_id": { "type": "string", "x-release-class": "RESEARCH_RESTRICTED" },
+        "schema_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[A-Za-z0-9.]+)?$", "x-release-class": "PUBLIC_SAFE" },
+        "compatible_release_version": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "state_transition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["from_state", "to_state"],
+          "properties": {
+            "from_state": { "type": "string", "x-release-class": "STAFF_AGGREGATE" },
+            "to_state": { "type": "string", "x-release-class": "STAFF_AGGREGATE" },
+            "previous_envelope_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "x-release-class": "STAFF_EVIDENCE" }
+          },
+          "x-release-class": "STAFF_AGGREGATE"
+        },
+        "coarsened_origin": {
+          "type": "string",
+          "description": "Deliberately coarsened origin (e.g. borough), NEVER exact postcode/lat-lon in any plane reachable by the public.",
+          "x-release-class": "STAFF_AGGREGATE"
+        },
+        "confirmed_requirements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Hard/soft constraints the user confirmed.",
+          "x-release-class": "PUBLIC_SAFE"
+        },
+        "release_maturity_class": {
+          "enum": ["research_demonstration", "public_safe_demonstration", "staff_shadow_mode", "controlled_partner_pilot"],
+          "description": "Project maturity-state name (WP 12.9). 'public_safe_demonstration' is NOT an unqualified safety claim.",
+          "x-release-class": "PUBLIC_SAFE"
+        },
+        "latency_ms": { "type": "number", "minimum": 0, "x-release-class": "STAFF_AGGREGATE" },
+        "failure_state": { "type": ["string", "null"], "x-release-class": "STAFF_AGGREGATE" },
+        "safety_gate_state": { "type": "string", "x-release-class": "STAFF_AGGREGATE" }
+      }
+    },
+    "parse_clarification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["editable_interpretation"],
+      "properties": {
+        "editable_interpretation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["slot", "value", "confidence"],
+            "properties": {
+              "slot": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+              "value": { "type": ["string", "number", "boolean", "null"], "x-release-class": "PUBLIC_SAFE" },
+              "confidence": { "type": "number", "minimum": 0, "maximum": 1, "x-release-class": "STAFF_AGGREGATE" },
+              "source_span": { "type": "string", "x-release-class": "RESEARCH_RESTRICTED" }
+            }
+          },
+          "x-release-class": "PUBLIC_SAFE"
+        }
+      }
+    },
+    "preference_clarification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question_text", "budget_state", "policy_id", "why_asked"],
+      "properties": {
+        "question_text": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "budget_state": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["asked", "budget"],
+          "properties": {
+            "asked": { "type": "integer", "minimum": 0, "x-release-class": "PUBLIC_SAFE" },
+            "budget": { "type": "integer", "minimum": 0, "x-release-class": "PUBLIC_SAFE" }
+          },
+          "x-release-class": "PUBLIC_SAFE"
+        },
+        "policy_id": { "type": "string", "x-release-class": "STAFF_AGGREGATE" },
+        "barrier_floor": { "type": "boolean", "description": "True when asked under the barrier-relevant floor (accessibility/price) regardless of EVOI.", "x-release-class": "PUBLIC_SAFE" },
+        "why_asked": { "type": "string", "description": "Plain-English reason the question can help (WP 9.3).", "x-release-class": "PUBLIC_SAFE" }
+      }
+    },
+    "evidence_clarification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blocker_statement", "can_user_answer_change"],
+      "properties": {
+        "blocker_statement": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "can_user_answer_change": {
+          "type": "boolean",
+          "description": "Observability honesty: whether any user answer could change the outcome given catalogue evidence (section-7.4).",
+          "x-release-class": "PUBLIC_SAFE"
+        },
+        "mechanism": { "type": "string", "x-release-class": "STAFF_EVIDENCE" }
+      }
+    },
+    "discovery_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision"],
+      "properties": {
+        "decision": {
+          "$ref": "https://ls-openactive/contracts/c-block-05/decision-envelope.schema.json",
+          "description": "The immutable terminal DecisionEnvelope. The interface may project/simplify it but may NEVER add certainty, reorder the certified slate, bypass abstention or surface a staff-only field."
+        }
+      }
+    },
+    "service_failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["failed_stage", "safe_next"],
+      "properties": {
+        "failed_stage": { "type": "string", "x-release-class": "STAFF_AGGREGATE" },
+        "safe_next": {
+          "enum": ["retry", "deterministic_fallback", "assisted_handoff"],
+          "description": "Never silently reuse stale content after failure (WP 7.3).",
+          "x-release-class": "PUBLIC_SAFE"
+        },
+        "stale_content_reused": { "const": false, "description": "Structural guard: must be false.", "x-release-class": "PUBLIC_SAFE" },
+        "diagnostic": { "type": "string", "x-release-class": "STAFF_EVIDENCE" }
+      }
+    }
+  }
+}

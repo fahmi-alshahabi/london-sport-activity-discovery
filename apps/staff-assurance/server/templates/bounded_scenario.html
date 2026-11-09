@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Bounded scenario laboratory{% endblock %}
+{% block content %}
+<h1>Bounded scenario laboratory &mdash; {{ scenario }}</h1>
+<p>{{ b.hypothesis }}:</p>
+<dl>
+  <dt>Unknown / conflicting fields in play</dt><dd>{{ b.unknown_or_conflict|join(', ') if b.unknown_or_conflict else 'none' }}</dd>
+  <dt>Lower bound (supported now)</dt><dd>{{ b.lower_bound }}</dd>
+  <dt>Upper bound (if those resolved favourably)</dt><dd>{{ b.upper_bound }}</dd>
+</dl>
+<p class="notice" role="note">{{ b.note }}</p>
+{% include "_provenance.html" %}
+<p><a href="/?role={{ role or '' }}">Back to workbench</a></p>
+{% endblock %}

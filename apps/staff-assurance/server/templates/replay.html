@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Public-state replay{% endblock %}
+{% block content %}
+<h1>Public-state replay &mdash; {{ scenario }}</h1>
+<p class="notice" role="note">This recomputes the digest of the retained <strong>public</strong>
+   payload the user received (semantic replay, C-BLOCK-09). Staff can inspect it, but this panel
+   changes nothing.</p>
+<table>
+  <caption>Digest replay</caption>
+  <tbody>
+    <tr><th scope="row">Stored digest</th><td>{{ r.stored }}</td></tr>
+    <tr><th scope="row">Recomputed digest</th><td>{{ r.recomputed }}</td></tr>
+    <tr><th scope="row">Match</th><td>{{ 'PASS — identical' if r.ok else 'FAIL — differs' }}</td></tr>
+  </tbody>
+</table>
+{% include "_provenance.html" %}
+<p><a href="/?role={{ role or '' }}">Back to workbench</a></p>
+{% endblock %}

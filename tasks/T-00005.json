@@ -1,0 +1,30 @@
+{
+  "task_id": "T-00005",
+  "task_template_id": "TT-0005",
+  "family": "accessibility_information",
+  "suite": "diagnostic",
+  "split": "LOCKED",
+  "query_text": "Does the Islington leisure centre have a wheelchair-accessible changing room?",
+  "constraints": [
+    {
+      "attribute": "borough",
+      "operator": "equals",
+      "value": "Islington",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "accessibility_feature",
+      "operator": "equals",
+      "value": "wheelchair_accessible_changing_room",
+      "hardness": "hard"
+    }
+  ],
+  "origin": {
+    "borough": "Islington"
+  },
+  "planted_defect": {
+    "mechanism": "stale_listing",
+    "expected_state": "indeterminate"
+  },
+  "notes": "Split assigned by seeded grouped random assignment on task_template_id, seed=42, scheme A (DEV+LOCKED; CAL_MODEL and CAL_RISK empty because F-08 calibration is descoped). Assignment followed authoring; no freeze had occurred at that point. Defect not yet planted: DEV vintage not fixed."
+}

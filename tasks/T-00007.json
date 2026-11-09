@@ -1,0 +1,33 @@
+{
+  "task_id": "T-00007",
+  "task_template_id": "TT-0007",
+  "family": "activity_geography",
+  "suite": "diagnostic",
+  "split": "DEV",
+  "query_text": "Which Greenwich leisure centres have both a gym and a swimming pool?",
+  "constraints": [
+    {
+      "attribute": "borough",
+      "operator": "equals",
+      "value": "Greenwich",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "activity_type",
+      "operator": "one_of",
+      "value": [
+        "gym",
+        "swimming"
+      ],
+      "hardness": "hard"
+    }
+  ],
+  "origin": {
+    "borough": "Greenwich"
+  },
+  "planted_defect": {
+    "mechanism": "projection_loss",
+    "expected_state": "scope_indeterminate"
+  },
+  "notes": "Split assigned by seeded grouped random assignment on task_template_id, seed=42, scheme A (DEV+LOCKED; CAL_MODEL and CAL_RISK empty because F-08 calibration is descoped). Assignment followed authoring; no freeze had occurred at that point. Defect not yet planted: DEV vintage not fixed."
+}

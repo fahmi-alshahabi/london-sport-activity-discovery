@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ls-openactive/contracts/certificate-checker/certificate.schema.json",
+  "title": "Certificate",
+  "version": "0.1.0-PROPOSED",
+  "$comment": "AI-ASSISTED SCAFFOLD from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md sec 10 (independent certificate checker). NOT authorship evidence; Clarence must inspect, correct in his own words, and obtain non-author review. He cannot certify his own checker (WP 2.6, 10.4). The compact witness Michael's production interpreter emits alongside a DecisionEnvelope; the checker validates THIS without trusting production. Field names/outcomes are PROPOSED and bind to RATIFY-09-04 (production/reference/checker ownership) and Section 09 vocabulary — do not invent competing semantics (WP 10.3).",
+  "description": "A compact witness that a terminal DecisionEnvelope is justified. The checker (certificate_checker.py) re-derives the decision from this witness + a receipt store + a release manifest, and never calls the production interpreter.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract", "schema_version", "query_id", "decision_digest", "claimed",
+    "versions", "compatible_release_root", "scope_witness", "predicate_witnesses",
+    "candidate_witnesses", "state_transition"
+  ],
+  "properties": {
+    "contract": { "const": "Certificate" },
+    "schema_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[A-Za-z0-9.]+)?$" },
+    "query_id": { "type": "string", "description": "Canonical query identifier; must equal the checker's expected_query_id or the certificate is for another query (WP 10.5)." },
+    "decision_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "description": "Digest of the DecisionEnvelope this certifies; must equal the expected decision digest." },
+    "claimed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["terminal_decision", "scope_qualifier", "recommendation_action"],
+      "properties": {
+        "terminal_decision": { "enum": ["supported_match", "bounded_non_match", "evidence_indeterminate"] },
+        "scope_qualifier": { "enum": ["scope_complete", "scope_indeterminate"] },
+        "recommendation_action": { "enum": ["authorised_slate", "model_abstained", "deterministic_fallback", "browse_only"] }
+      }
+    },
+    "versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["corpus_version", "interpretation_version", "schema_version", "verifier_version", "checker_version"],
+      "properties": {
+        "corpus_version": { "type": "string" },
+        "interpretation_version": { "type": "string" },
+        "schema_version": { "type": "string" },
+        "verifier_version": { "type": "string" },
+        "checker_version": { "type": "string" }
+      }
+    },
+    "compatible_release_root": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "scope_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evaluated_complete"],
+      "properties": {
+        "evaluated_complete": { "type": "boolean", "description": "Whether collection/geographic scope was fully evaluated. Must be consistent with claimed.scope_qualifier (WP 10.5 'scope qualifier dropped')." }
+      }
+    },
+    "coverage_qualifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["acquisition_complete", "statement"],
+      "properties": {
+        "acquisition_complete": { "type": "boolean" },
+        "statement": { "type": "string", "minLength": 1 }
+      }
+    },
+    "predicate_witnesses": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/predicate_witness" }
+    },
+    "candidate_witnesses": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/candidate_witness" }
+    },
+    "state_transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_state", "to_state"],
+      "properties": {
+        "from_state": { "type": "string" },
+        "to_state": { "type": "string" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "claimed": { "properties": { "terminal_decision": { "const": "bounded_non_match" } } } } },
+      "then": { "required": ["coverage_qualifier"] }
+    }
+  ],
+  "$defs": {
+    "predicate_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate_id", "evidence_state", "grade", "fragment_class", "receipts"],
+      "properties": {
+        "predicate_id": { "type": "string" },
+        "evidence_state": { "enum": ["T", "F", "U", "B"] },
+        "grade": { "enum": ["explicit", "schedule_derived", "specification_default"] },
+        "fragment_class": { "type": "string", "description": "Which certifiable fragment this predicate belongs to; checked against the manifest allow-list (FAIL_UNSUPPORTED_FRAGMENT)." },
+        "receipts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["receipt_id", "content_digest"],
+            "properties": {
+              "receipt_id": { "type": "string" },
+              "content_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+            }
+          }
+        }
+      }
+    },
+    "candidate_witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_id", "rank", "pool", "hard_predicate_ids"],
+      "properties": {
+        "candidate_id": { "type": "string" },
+        "rank": { "type": "integer", "minimum": 1 },
+        "pool": { "enum": ["supported", "indeterminate", "excluded"] },
+        "hard_predicate_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

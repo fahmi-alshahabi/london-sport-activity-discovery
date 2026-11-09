@@ -1,0 +1,86 @@
+{
+  "action_kind": "discovery_decision",
+  "header": {
+    "episode_id": "ep-7731",
+    "turn_id": 3,
+    "request_id": "req-55021",
+    "trace_id": "trace-aa19",
+    "schema_version": "0.1.0",
+    "compatible_release_version": "app-0.1.0",
+    "state_transition": {
+      "from_state": "query_review",
+      "to_state": "discovery_decision",
+      "previous_envelope_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "coarsened_origin": "LB Croydon",
+    "confirmed_requirements": [
+      "activity=swimming",
+      "access=step_free"
+    ],
+    "release_maturity_class": "research_demonstration",
+    "latency_ms": 812,
+    "failure_state": null,
+    "safety_gate_state": "passed"
+  },
+  "payload": {
+    "decision": {
+      "contract": "DecisionEnvelope",
+      "schema_version": "0.1.0",
+      "identity": {
+        "episode_id": "ep-7731",
+        "turn_id": 3,
+        "request_id": "req-55021",
+        "trace_id": "trace-aa19"
+      },
+      "versions": {
+        "corpus_version": "H1-2026-06-30",
+        "interpretation_version": "interp-1.2",
+        "search_horizon_version": "hz-2026Q3",
+        "model_version": "recmodel-0.3",
+        "policy_version": "explicit-three-state",
+        "verifier_version": "ver-1.0",
+        "vintage": "2026-06-30"
+      },
+      "terminal_decision": "bounded_non_match",
+      "scope_qualifier": "scope_complete",
+      "coverage_qualifier": {
+        "acquisition_complete": false,
+        "statement": "",
+        "unevaluated_feeds": 2
+      },
+      "recommendation_action": "deterministic_fallback",
+      "predicates": [
+        {
+          "predicate_id": "access=step_free",
+          "evidence_state": "F",
+          "grade": "explicit",
+          "receipts": [
+            {
+              "receipt_id": "r-a2",
+              "content_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+            }
+          ]
+        }
+      ],
+      "candidates": [],
+      "why_not": [],
+      "claims": [
+        {
+          "claim_type": "bounded_non_match",
+          "subject": "query",
+          "predicate": "match",
+          "value": false,
+          "receipt_ids": [
+            "r-a2"
+          ],
+          "evidence_grade": "explicit",
+          "qualifiers": [
+            "within acquired Croydon feeds"
+          ],
+          "verification": "verified"
+        }
+      ],
+      "digest": "sha256:37427ac0a4378d27ceb889ce2d3b62ed7a3b36f49f418614ec4adc9f8d926aec"
+    }
+  }
+}

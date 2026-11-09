@@ -1,0 +1,91 @@
+{
+  "action_kind": "discovery_decision",
+  "header": {
+    "episode_id": "ep-nm-1",
+    "turn_id": 2,
+    "request_id": "req-nm-1",
+    "trace_id": "tr-nm-1",
+    "schema_version": "0.1.0",
+    "compatible_release_version": "app-0.1.0",
+    "state_transition": {
+      "from_state": "query_review",
+      "to_state": "discovery_decision"
+    },
+    "coarsened_origin": "LB Havering",
+    "confirmed_requirements": [
+      "activity=climbing",
+      "access=step_free"
+    ],
+    "release_maturity_class": "research_demonstration",
+    "latency_ms": 640,
+    "failure_state": null,
+    "safety_gate_state": "passed"
+  },
+  "payload": {
+    "decision": {
+      "contract": "DecisionEnvelope",
+      "schema_version": "0.1.0",
+      "identity": {
+        "episode_id": "ep-nm-1",
+        "turn_id": 2,
+        "request_id": "req-nm-1",
+        "trace_id": "tr-nm-1"
+      },
+      "versions": {
+        "corpus_version": "H1-2026-06-30",
+        "interpretation_version": "interp-1.2",
+        "search_horizon_version": "hz-2026Q3",
+        "model_version": "recmodel-0.3",
+        "policy_version": "explicit-three-state",
+        "verifier_version": "ver-1.0",
+        "vintage": "2026-06-30"
+      },
+      "terminal_decision": "bounded_non_match",
+      "scope_qualifier": "scope_complete",
+      "coverage_qualifier": {
+        "acquisition_complete": true,
+        "statement": "Searched all 4 Havering feeds acquired on 2026-06-30; none listed indoor climbing with step-free access.",
+        "unevaluated_feeds": 0
+      },
+      "recommendation_action": "deterministic_fallback",
+      "predicates": [
+        {
+          "predicate_id": "activity=climbing",
+          "evidence_state": "F",
+          "grade": "explicit",
+          "receipts": [
+            {
+              "receipt_id": "r-nm1",
+              "content_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+            }
+          ]
+        }
+      ],
+      "candidates": [],
+      "why_not": [
+        {
+          "predicate_id": "activity=climbing",
+          "blocking_state": "F",
+          "relaxation_suggestion": "Widen the area or try a different activity."
+        }
+      ],
+      "claims": [
+        {
+          "claim_type": "bounded_non_match",
+          "subject": "query",
+          "predicate": "match",
+          "value": false,
+          "receipt_ids": [
+            "r-nm1"
+          ],
+          "evidence_grade": "explicit",
+          "qualifiers": [
+            "within acquired Havering feeds"
+          ],
+          "verification": "verified"
+        }
+      ],
+      "digest": "sha256:419560ccdae6eb313b6902dfe3565cd557cdc7eb5a1c885b3cbe6ffdcd68beb5"
+    }
+  }
+}

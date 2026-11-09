@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Why this was shown{% endblock %}
+{% block content %}
+<h1>Why &ldquo;{{ c.id }}&rdquo; was shown</h1>
+<p class="meta">Data vintage: {{ v.vintage }}. Ordering: {{ v.recommendation_text }}.</p>
+
+<h2>Evidence for each requirement</h2>
+<table>
+  <caption>What the published data supports for this option</caption>
+  <thead>
+    <tr><th scope="col">Requirement</th><th scope="col">Evidence</th><th scope="col">Basis</th></tr>
+  </thead>
+  <tbody>
+    {% for a in c.attributes %}
+    <tr>
+      <th scope="row">{{ a.id }}</th>
+      <td class="ev-cell ev-{{ a.state }}">{{ a.state_text }}</td>
+      <td>{{ a.grade_text }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p>Fields shown as &ldquo;not published&rdquo; are missing from the source &mdash; they are not a
+   &ldquo;no&rdquo;. Nothing here is a guarantee of availability or booking.</p>
+
+<p class="actions">
+  {% if c.provider_link %}<a class="button" href="{{ c.provider_link }}" rel="nofollow noopener">Go to provider</a>{% endif %}
+  <a class="button" href="/discover?scenario=supported">Back to results</a>
+</p>
+{% endblock %}

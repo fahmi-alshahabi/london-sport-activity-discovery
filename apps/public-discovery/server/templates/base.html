@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Find an activity{% endblock %} — Activity discovery (research demonstration)</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header>
+    <p class="brand">Activity discovery <span class="tag">research demonstration</span></p>
+    <nav aria-label="Primary">
+      <a href="/">Search</a>
+      <a href="/help">Help / get assistance</a>
+    </nav>
+  </header>
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    <p>Evidence-bounded discovery over OpenActive. A research demonstration — not a booking,
+       payment or referral service, and not medical advice. &ldquo;No listed match&rdquo; never
+       means &ldquo;no activity exists&rdquo;.</p>
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

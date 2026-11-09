@@ -1,0 +1,23 @@
+{
+  "name": "public-discovery-client",
+  "private": true,
+  "version": "0.1.0-PROPOSED",
+  "type": "module",
+  "description": "Progressive-enhancement layer over the SSR public discovery core. NOT required for the core (ADR-0001). AI-assisted scaffold; not authorship evidence.",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0"
+  }
+}

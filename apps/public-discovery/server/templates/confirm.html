@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Please confirm{% endblock %}
+{% block content %}
+<h1>Please confirm your requirements</h1>
+<p>I understood these as firm requirements: <strong>{{ it.hard|join(', ') }}</strong>.</p>
+<p class="notice" role="note">Because <strong>step-free access</strong> matters for getting there
+   safely, I&rsquo;ll only treat it as a must-have if you confirm.</p>
+<p class="actions">
+  <a class="button" href="/chat?{{ confirm_qs }}">Confirm &amp; continue</a>
+  <a class="button" href="/chat">Edit my request</a>
+</p>
+{% endblock %}

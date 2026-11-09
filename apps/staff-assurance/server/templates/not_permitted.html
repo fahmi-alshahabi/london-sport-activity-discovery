@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Not permitted for your role{% endblock %}
+{% block content %}
+<h1>Not permitted for your role</h1>
+<p class="notice" role="alert">Role <strong>{{ role }}</strong> may not perform
+   <strong>{{ frm }} &rarr; {{ to }}</strong> &mdash; it requires the <strong>{{ capability }}</strong>
+   capability. Draft, independent review, approval and sending are separated by role, so no single
+   role can draft, approve and send the same card (WP §8.3, §8.5).</p>
+<p><a href="/action-card?state={{ frm }}&role={{ role or '' }}">Back to the card</a></p>
+{% endblock %}

@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# Environment / secrets — never commit these
+.env
+*.key
+
+# Data — raw and processed data is never committed (esp. partner data)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Node / frontend build output
+node_modules/
+dist/
+apps/public-discovery/server/static/enhanced/
+
+# Misc
+*.log
+.cache/
+docs/drift_2026-08-27_2026-09-06.csv

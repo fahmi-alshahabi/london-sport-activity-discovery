@@ -1,0 +1,87 @@
+{
+  "action_kind": "discovery_decision",
+  "header": {
+    "episode_id": "ep-in-1",
+    "turn_id": 2,
+    "request_id": "req-in-1",
+    "trace_id": "tr-in-1",
+    "schema_version": "0.1.0",
+    "compatible_release_version": "app-0.1.0",
+    "state_transition": {
+      "from_state": "query_review",
+      "to_state": "discovery_decision"
+    },
+    "coarsened_origin": "LB Croydon",
+    "confirmed_requirements": [
+      "activity=yoga",
+      "access=step_free"
+    ],
+    "release_maturity_class": "research_demonstration",
+    "latency_ms": 700,
+    "failure_state": null,
+    "safety_gate_state": "passed"
+  },
+  "payload": {
+    "decision": {
+      "contract": "DecisionEnvelope",
+      "schema_version": "0.1.0",
+      "identity": {
+        "episode_id": "ep-in-1",
+        "turn_id": 2,
+        "request_id": "req-in-1",
+        "trace_id": "tr-in-1"
+      },
+      "versions": {
+        "corpus_version": "H1-2026-06-30",
+        "interpretation_version": "interp-1.2",
+        "search_horizon_version": "hz-2026Q3",
+        "model_version": "recmodel-0.3",
+        "policy_version": "explicit-three-state",
+        "verifier_version": "ver-1.0",
+        "vintage": "2026-06-30"
+      },
+      "terminal_decision": "evidence_indeterminate",
+      "scope_qualifier": "scope_indeterminate",
+      "coverage_qualifier": {
+        "acquisition_complete": false,
+        "statement": "2 of 6 Croydon feeds timed out on 2026-06-30; results may be incomplete.",
+        "unevaluated_feeds": 2
+      },
+      "recommendation_action": "model_abstained",
+      "predicates": [
+        {
+          "predicate_id": "access=step_free",
+          "evidence_state": "U",
+          "mechanism": "source_absence",
+          "grade": "specification_default",
+          "lineage_note": "accessibility field absent on the yoga SessionSeries"
+        }
+      ],
+      "candidates": [],
+      "why_not": [
+        {
+          "predicate_id": "access=step_free",
+          "blocking_state": "U",
+          "relaxation_suggestion": "Ask the provider directly whether the venue is step-free."
+        }
+      ],
+      "claims": [
+        {
+          "claim_type": "uncertainty",
+          "subject": "query",
+          "predicate": "access=step_free",
+          "value": null,
+          "receipt_ids": [
+            "r-in1"
+          ],
+          "evidence_grade": "specification_default",
+          "qualifiers": [
+            "accessibility not published"
+          ],
+          "verification": "verified"
+        }
+      ],
+      "digest": "sha256:143b0a7c6543693588face62d54d51e27cae35bd706b154a46bbdaa4b23d109f"
+    }
+  }
+}

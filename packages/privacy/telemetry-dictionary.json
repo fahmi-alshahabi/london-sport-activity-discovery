@@ -1,0 +1,38 @@
+{
+  "_comment": "AI-ASSISTED SCAFFOLD from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md §12.4/§12.5/§13.3 (C-13, C-BLOCK-07). NOT authorship evidence. Clarence COORDINATES this; the controller/processor and lawful-basis determinations are governance decisions (RATIFY-15-02/04), not his to issue. Transient-by-default from the first line of code.",
+  "version": "0.1.0-PROPOSED",
+  "status": "PROPOSED",
+  "transient_by_default": true,
+  "note": "Every field below must match a property in packages/evaluation/event-schema.json (validate_privacy.py checks parity). Hashes of postcodes/access needs/staff ids are NOT automatically anonymous (WP §12.5).",
+
+  "retention_classes": ["transient", "session", "approved_research", "operational_audit"],
+
+  "planes": {
+    "restricted_source": "raw publisher/source evidence — never reachable by a public route",
+    "public_service": "privacy-minimised public service surface",
+    "staff_ops": "role-gated staff operations",
+    "approved_research": "approved research data only"
+  },
+  "cross_plane_join_rules": "Any cross-plane join requires a registered purpose, minimum fields, an authorised service, logging and an expiry (WP §12.4). No direct public route may reach the source archive, staff store or research store.",
+
+  "forbidden_fields": ["raw_utterance", "exact_location", "free_text", "access_needs", "postcode", "latitude", "longitude", "home_address"],
+
+  "fields": {
+    "event_name":            { "personal_data": false, "retention_class_default": "session",          "purpose": "which UI event occurred",                 "minimisation": "closed vocabulary of event names" },
+    "event_schema_version":  { "personal_data": false, "retention_class_default": "session",          "purpose": "schema version for replay",               "minimisation": "version string only" },
+    "condition_id":          { "personal_data": false, "retention_class_default": "approved_research", "purpose": "which evaluation condition (P0..W1-NA)",   "minimisation": "enum only" },
+    "task_id":               { "personal_data": false, "retention_class_default": "approved_research", "purpose": "which frozen task",                        "minimisation": "frozen task id only" },
+    "episode_id":            { "personal_data": true,  "retention_class_default": "transient",         "purpose": "correlate turns within one session",      "minimisation": "pseudonymous/ephemeral; not a stable identifier; discarded with the session" },
+    "application_release_id":{ "personal_data": false, "retention_class_default": "session",          "purpose": "which build produced the event",           "minimisation": "release id only" },
+    "envelope_digest":       { "personal_data": false, "retention_class_default": "approved_research", "purpose": "tie event to a decision for replay",       "minimisation": "digest only, no payload" },
+    "route":                 { "personal_data": false, "retention_class_default": "session",          "purpose": "which route (guided/list/map/chat)",       "minimisation": "route name only" },
+    "state_before":          { "personal_data": false, "retention_class_default": "session",          "purpose": "state-machine transition source",          "minimisation": "state name only" },
+    "authorised_action":     { "personal_data": false, "retention_class_default": "session",          "purpose": "the authorised action taken",              "minimisation": "action name only" },
+    "state_after":           { "personal_data": false, "retention_class_default": "session",          "purpose": "state-machine transition target",          "minimisation": "state name only" },
+    "duration_ms":           { "personal_data": false, "retention_class_default": "session",          "purpose": "latency / time-on-step as approved",       "minimisation": "duration only, never a wall-clock personal timestamp" },
+    "error_or_fallback_code":{ "personal_data": false, "retention_class_default": "session",          "purpose": "failure/fallback diagnosis",               "minimisation": "code only, no stack/content" },
+    "accessibility_mode":    { "personal_data": true,  "retention_class_default": "transient",         "purpose": "adapt/measure accessible routes",          "minimisation": "only if voluntarily and safely captured; never a disability identity; special-category risk" },
+    "purpose":               { "personal_data": false, "retention_class_default": "session",          "purpose": "research vs operational purpose tag",       "minimisation": "enum only" },
+    "retention_class":       { "personal_data": false, "retention_class_default": "session",          "purpose": "declared retention for this event",         "minimisation": "enum only" }
+  }
+}

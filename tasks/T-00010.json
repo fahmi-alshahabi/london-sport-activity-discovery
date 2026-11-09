@@ -1,0 +1,33 @@
+{
+  "task_id": "T-00010",
+  "task_template_id": "TT-0010",
+  "family": "age_information",
+  "suite": "diagnostic",
+  "split": "LOCKED",
+  "query_text": "What time does the Waltham Forest centre's under-12-only session start?",
+  "constraints": [
+    {
+      "attribute": "borough",
+      "operator": "equals",
+      "value": "Waltham Forest",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "age_range",
+      "operator": "within",
+      "value": [
+        0,
+        12
+      ],
+      "hardness": "hard"
+    }
+  ],
+  "origin": {
+    "borough": "Waltham Forest"
+  },
+  "planted_defect": {
+    "mechanism": "false_premise",
+    "expected_state": "bounded_non_match"
+  },
+  "notes": "Split assigned by seeded grouped random assignment on task_template_id, seed=42, scheme A (DEV+LOCKED; CAL_MODEL and CAL_RISK empty because F-08 calibration is descoped). Assignment followed authoring; no freeze had occurred at that point. Defect not yet planted: DEV vintage not fixed."
+}

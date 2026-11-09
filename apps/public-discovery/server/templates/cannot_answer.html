@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}The data can’t answer this{% endblock %}
+{% block content %}
+<h1>{{ v.terminal_text }}</h1>
+{% if v.scope_notice %}
+<p class="notice" role="note"><strong>Coverage:</strong> {{ v.scope_notice }}.{% if v.coverage %} {{ v.coverage }}{% endif %}</p>
+{% endif %}
+<p>
+  The published data doesn&rsquo;t contain enough to answer this confidently. This is different from
+  &ldquo;no listed match&rdquo;, and different from a technical error &mdash; the information simply
+  isn&rsquo;t there to decide either way.
+</p>
+<p class="actions">
+  <a class="button" href="/">Try a different search</a>
+  <a class="button" href="/help">Get assistance</a>
+</p>
+{% endblock %}

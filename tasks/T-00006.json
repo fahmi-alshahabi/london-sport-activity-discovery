@@ -1,0 +1,36 @@
+{
+  "task_id": "T-00006",
+  "task_template_id": "TT-0006",
+  "family": "compound_referral",
+  "suite": "diagnostic",
+  "split": "LOCKED",
+  "query_text": "Where can I do aqua aerobics and then get a disabled parking space nearby in Lambeth?",
+  "constraints": [
+    {
+      "attribute": "borough",
+      "operator": "equals",
+      "value": "Lambeth",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "activity_type",
+      "operator": "equals",
+      "value": "aqua_aerobics",
+      "hardness": "hard"
+    },
+    {
+      "attribute": "accessibility_feature",
+      "operator": "equals",
+      "value": "disabled_parking",
+      "hardness": "soft"
+    }
+  ],
+  "origin": {
+    "borough": "Lambeth"
+  },
+  "planted_defect": {
+    "mechanism": "vocabulary_failure",
+    "expected_state": "scope_indeterminate"
+  },
+  "notes": "Split assigned by seeded grouped random assignment on task_template_id, seed=42, scheme A (DEV+LOCKED; CAL_MODEL and CAL_RISK empty because F-08 calibration is descoped). Assignment followed authoring; no freeze had occurred at that point. Defect not yet planted: DEV vintage not fixed."
+}

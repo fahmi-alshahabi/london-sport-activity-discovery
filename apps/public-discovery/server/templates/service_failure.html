@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Something went wrong{% endblock %}
+{% block content %}
+<h1>Something went wrong</h1>
+<p class="notice" role="alert">
+  A component didn&rsquo;t respond. We will not show a stale or made-up
+  result in its place.
+</p>
+<p>Next step: {{ v.safe_next|replace("_", " ") }}.</p>
+<p class="actions">
+  <a class="button" href="/discover?scenario=supported">Try again</a>
+  <a class="button" href="/help">Get assistance</a>
+</p>
+{% endblock %}

@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ls-openactive/contracts/c-block-05/decision-envelope.schema.json",
+  "title": "DecisionEnvelope",
+  "version": "0.1.0-PROPOSED",
+  "$comment": "AI-ASSISTED SCAFFOLD prepared from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md (7 Aug 2026) sections 4.2/4.3 and review CA-1/CA-3. NOT evidence that Clarence authored, read or accepted it. Clarence must inspect it, correct it in his own words, and obtain non-author review. Exact vocabulary (evidence states, grades, checker/decision names, disclosure-class names) is PROPOSED and must bind to the ratified Sections 09/13/14 vocabulary (RATIFY-09-01/02/03/05, RATIFY-14-04) before freeze — do not invent competing semantics (WP 10.3).",
+  "description": "The terminal, IMMUTABLE evidence decision for one request. This is the single object CA-1's L_reliance referent MUST bind to: its evidence state is identical across the P0/P1/P2 (and W0/W1/W1-NA) conditions by design, so unsafe reliance is judged against the same evidence regardless of what an interface chooses to display. The digest binds the object for semantic replay (C-BLOCK-09).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract", "schema_version", "identity", "versions",
+    "terminal_decision", "scope_qualifier", "coverage_qualifier",
+    "recommendation_action", "predicates", "candidates", "claims", "digest"
+  ],
+  "properties": {
+    "contract": { "const": "DecisionEnvelope" },
+    "schema_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[A-Za-z0-9.]+)?$", "x-release-class": "PUBLIC_SAFE" },
+    "identity": { "$ref": "#/$defs/identity" },
+    "versions": { "$ref": "#/$defs/versions" },
+
+    "terminal_decision": {
+      "description": "The evidence decision. NEVER collapse across these (WP 4.2). Absence of a match is not refutation.",
+      "enum": ["supported_match", "bounded_non_match", "evidence_indeterminate"],
+      "x-release-class": "PUBLIC_SAFE"
+    },
+    "scope_qualifier": {
+      "description": "Orthogonal collection/geographic completeness. 'scope_indeterminate' must never be rendered as a bounded_non_match (C-BLOCK-08/14).",
+      "enum": ["scope_complete", "scope_indeterminate"],
+      "x-release-class": "PUBLIC_SAFE"
+    },
+    "coverage_qualifier": {
+      "description": "Independent acquisition-coverage statement. MANDATORY and non-empty whenever terminal_decision = bounded_non_match: 'no observed listed match' is never 'no activity exists'.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["acquisition_complete", "statement"],
+      "properties": {
+        "acquisition_complete": { "type": "boolean", "x-release-class": "PUBLIC_SAFE" },
+        "statement": { "type": "string", "minLength": 1, "x-release-class": "PUBLIC_SAFE" },
+        "unevaluated_feeds": { "type": "integer", "minimum": 0, "x-release-class": "STAFF_AGGREGATE" }
+      },
+      "x-release-class": "PUBLIC_SAFE"
+    },
+    "recommendation_action": {
+      "description": "Separate from the evidence decision (WP 4.2). model_abstained is NOT evidence_indeterminate; browse_only is NOT an authorised_slate.",
+      "enum": ["authorised_slate", "model_abstained", "deterministic_fallback", "browse_only"],
+      "x-release-class": "PUBLIC_SAFE"
+    },
+
+    "predicates": {
+      "type": "array",
+      "description": "Per-predicate atomic evidence. evidence_state is first-class; U and B are terminal outcomes, never smoothed into F or into support.",
+      "items": { "$ref": "#/$defs/predicate" },
+      "x-release-class": "PUBLIC_SAFE"
+    },
+    "candidates": {
+      "type": "array",
+      "description": "The certified slate / supported pool in CERTIFIED ORDER. display_order MUST equal array order; client sort/map/pagination may never change eligibility or order (C-BLOCK-14).",
+      "items": { "$ref": "#/$defs/candidate" },
+      "x-release-class": "PUBLIC_SAFE"
+    },
+    "why_not": {
+      "type": "array",
+      "description": "Blocking predicates from the gate ledger for excluded candidates / empty pools.",
+      "items": { "$ref": "#/$defs/why_not_entry" },
+      "x-release-class": "STAFF_EVIDENCE"
+    },
+    "claims": {
+      "type": "array",
+      "description": "Typed claim tuples (WP 9 / section-8.3). ONLY verification=verified may be rendered; a failed/unresolvable tuple must never reach the public plane (C-BLOCK-10).",
+      "items": { "$ref": "#/$defs/claim_tuple" },
+      "x-release-class": "PUBLIC_SAFE"
+    },
+    "digest": {
+      "description": "Canonical content digest of the retained semantic payload; recomputed on staff replay (semantic replay, C-BLOCK-09).",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "x-release-class": "PUBLIC_SAFE"
+    }
+  },
+
+  "allOf": [
+    {
+      "if": { "properties": { "terminal_decision": { "const": "bounded_non_match" } } },
+      "then": {
+        "properties": {
+          "coverage_qualifier": { "properties": { "statement": { "minLength": 1 } }, "required": ["statement"] }
+        },
+        "required": ["coverage_qualifier"]
+      }
+    }
+  ],
+
+  "$defs": {
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["episode_id", "turn_id", "request_id", "trace_id"],
+      "properties": {
+        "episode_id": { "type": "string", "x-release-class": "RESEARCH_RESTRICTED" },
+        "turn_id": { "type": "integer", "minimum": 0, "x-release-class": "STAFF_AGGREGATE" },
+        "request_id": { "type": "string", "x-release-class": "STAFF_EVIDENCE" },
+        "trace_id": { "type": "string", "x-release-class": "RESEARCH_RESTRICTED" }
+      }
+    },
+    "versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["corpus_version", "interpretation_version", "verifier_version"],
+      "properties": {
+        "corpus_version": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "interpretation_version": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "search_horizon_version": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "model_version": { "type": "string", "x-release-class": "STAFF_AGGREGATE" },
+        "policy_version": { "type": "string", "x-release-class": "STAFF_AGGREGATE" },
+        "verifier_version": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "vintage": { "type": "string", "description": "Snapshot/freshness stamp shown publicly.", "x-release-class": "PUBLIC_SAFE" }
+      }
+    },
+    "predicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate_id", "evidence_state", "grade"],
+      "properties": {
+        "predicate_id": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "evidence_state": {
+          "description": "T=supported, F=refuted, U=unknown-by-mechanism, B=conflict (WP 4.2).",
+          "enum": ["T", "F", "U", "B"],
+          "x-release-class": "PUBLIC_SAFE"
+        },
+        "mechanism": {
+          "description": "Required when evidence_state is U or B: a closed typed mechanism label (source_absence, linked_source_failure, unresolved_inheritance, invalid_or_ambiguous_value, conflicting_value, vocabulary_failure, projection_loss, staleness, spatial_uncertainty).",
+          "enum": [
+            "source_absence", "linked_source_failure", "unresolved_inheritance",
+            "invalid_or_ambiguous_value", "conflicting_value", "vocabulary_failure",
+            "projection_loss", "staleness", "spatial_uncertainty"
+          ],
+          "x-release-class": "PUBLIC_SAFE"
+        },
+        "grade": {
+          "description": "Evidence grade. schedule_derived and specification_default are visibly weaker than explicit; none implies capacity/bookability.",
+          "enum": ["explicit", "schedule_derived", "specification_default"],
+          "x-release-class": "PUBLIC_SAFE"
+        },
+        "receipts": { "type": "array", "items": { "$ref": "#/$defs/receipt_ref" }, "x-release-class": "STAFF_EVIDENCE" },
+        "lineage_note": { "type": "string", "description": "Raw parent/child provenance prose — staff-only.", "x-release-class": "STAFF_EVIDENCE" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "evidence_state": { "enum": ["U", "B"] } } },
+          "then": { "required": ["mechanism"] }
+        }
+      ]
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_id", "rank", "pool"],
+      "properties": {
+        "candidate_id": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "rank": { "type": "integer", "minimum": 1, "description": "Certified display order; total-order tie-break upstream.", "x-release-class": "PUBLIC_SAFE" },
+        "pool": {
+          "description": "supported = eligible; indeterminate = held separately, never interleaved as supported; excluded = removed with why_not.",
+          "enum": ["supported", "indeterminate", "excluded"],
+          "x-release-class": "PUBLIC_SAFE"
+        },
+        "attributes": { "type": "array", "items": { "$ref": "#/$defs/predicate" }, "x-release-class": "PUBLIC_SAFE" },
+        "provider_link": { "type": "string", "format": "uri", "description": "Provider-controlled handoff URL only; validated/safe-encoded before render.", "x-release-class": "PUBLIC_SAFE" },
+        "internal_score": { "type": "number", "description": "Ranking utility — staff aggregate; never a public 'best for you' signal.", "x-release-class": "STAFF_AGGREGATE" }
+      }
+    },
+    "why_not_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate_id", "blocking_state"],
+      "properties": {
+        "predicate_id": { "type": "string", "x-release-class": "STAFF_EVIDENCE" },
+        "blocking_state": { "enum": ["F", "U", "B"], "x-release-class": "STAFF_EVIDENCE" },
+        "relaxation_suggestion": { "type": "string", "description": "User must explicitly confirm; system never silently relaxes a hard constraint.", "x-release-class": "PUBLIC_SAFE" }
+      }
+    },
+    "claim_tuple": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_type", "subject", "predicate", "value", "receipt_ids", "evidence_grade", "verification"],
+      "properties": {
+        "claim_type": {
+          "enum": ["listing_attribute", "match_cardinality", "bounded_non_match", "uncertainty", "process"],
+          "x-release-class": "PUBLIC_SAFE"
+        },
+        "subject": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "predicate": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "value": { "type": ["string", "number", "boolean", "null"], "x-release-class": "PUBLIC_SAFE" },
+        "receipt_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1, "x-release-class": "STAFF_EVIDENCE" },
+        "evidence_grade": { "enum": ["explicit", "schedule_derived", "specification_default"], "x-release-class": "PUBLIC_SAFE" },
+        "qualifiers": { "type": "array", "items": { "type": "string" }, "x-release-class": "PUBLIC_SAFE" },
+        "verification": {
+          "description": "Set by the deterministic verifier. Only 'verified' may render (C-BLOCK-10).",
+          "enum": ["verified", "failed", "unresolvable"],
+          "x-release-class": "STAFF_EVIDENCE"
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "claim_type": { "const": "bounded_non_match" } } },
+          "then": { "properties": { "qualifiers": { "minItems": 1 } }, "required": ["qualifiers"] }
+        }
+      ]
+    },
+    "receipt_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt_id", "content_digest"],
+      "properties": {
+        "receipt_id": { "type": "string", "x-release-class": "STAFF_EVIDENCE" },
+        "content_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "x-release-class": "STAFF_EVIDENCE" }
+      }
+    }
+  }
+}

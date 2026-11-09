@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Release / incident control{% endblock %}
+{% block content %}
+<h1>Release / incident control &mdash; {{ scenario }}</h1>
+<dl>
+  <dt>Maturity state</dt><dd>{{ x.maturity }}</dd>
+  <dt>Safety gate</dt><dd>{{ x.safety_gate_state }}</dd>
+  <dt>Kill switch</dt><dd>{{ x.kill_switch }}</dd>
+  <dt>Rollback</dt><dd>{{ x.rollback }}</dd>
+</dl>
+<p class="notice" role="note">{{ x.note }}</p>
+{% include "_provenance.html" %}
+<p><a href="/?role={{ role or '' }}">Back to workbench</a></p>
+{% endblock %}

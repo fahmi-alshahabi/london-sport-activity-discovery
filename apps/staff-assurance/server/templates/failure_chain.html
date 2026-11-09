@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Failure-chain explorer{% endblock %}
+{% block content %}
+<h1>Failure-chain explorer &mdash; {{ scenario }}</h1>
+<p>Where a public outcome became limited, traced across the pipeline. Diagnostic only &mdash; no
+   realised-gain wording.</p>
+<table>
+  <caption>Acquisition &rarr; reconstruction/evidence &rarr; gate &rarr; interface</caption>
+  <thead><tr><th scope="col">Stage</th><th scope="col">Detail</th><th scope="col">Status</th></tr></thead>
+  <tbody>
+    {% for s in steps %}
+    <tr><th scope="row">{{ s.stage }}</th><td>{{ s.detail }}</td><td>{{ s.status }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% include "_provenance.html" %}
+<p><a href="/?role={{ role or '' }}">Back to workbench</a></p>
+{% endblock %}

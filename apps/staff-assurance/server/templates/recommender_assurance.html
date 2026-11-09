@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Recommender / AI assurance{% endblock %}
+{% block content %}
+<h1>Recommender / AI assurance &mdash; {{ scenario }}</h1>
+<dl>
+  <dt>Model version</dt><dd>{{ r.model_version }}</dd>
+  <dt>Policy version</dt><dd>{{ r.policy_version }}</dd>
+  <dt>Recommendation action</dt><dd>{{ r.recommendation_action }}{% if r.abstained %} (model abstained){% endif %}</dd>
+  <dt>Supported candidates</dt><dd>{{ r.supported_count }}</dd>
+  <dt>Scope</dt><dd>{{ r.scope }}</dd>
+</dl>
+<p class="notice" role="note">{{ r.note }}</p>
+{% include "_provenance.html" %}
+<p><a href="/?role={{ role or '' }}">Back to workbench</a></p>
+{% endblock %}

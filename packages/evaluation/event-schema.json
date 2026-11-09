@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ls-openactive/contracts/evaluation/event-schema.json",
+  "title": "EvaluationEvent",
+  "version": "0.2.0-PROPOSED",
+  "$comment": "AI-ASSISTED SCAFFOLD (WP §13.3, C-BLOCK-07). Privacy-minimised telemetry event. additionalProperties:false makes it impossible to add raw utterances, exact location or free text by construction. Bind to RATIFY-14-11 / governance before collection; transient-by-default.",
+  "description": "One semantically meaningful, privacy-minimised evaluation event. Never log raw utterances, exact location, access needs or free text.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event_name", "event_schema_version", "condition_id", "task_id",
+               "episode_id", "application_release_id", "envelope_digest", "route", "retention_class", "purpose"],
+  "properties": {
+    "event_name": { "type": "string" },
+    "event_schema_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[A-Za-z0-9.]+)?$" },
+    "condition_id": { "enum": ["P0", "P1", "P2", "W0", "W1", "W1-NA"] },
+    "task_id": { "type": "string" },
+    "episode_id": { "type": "string", "description": "Pseudonymous or ephemeral; never a stable personal identifier." },
+    "application_release_id": { "type": "string" },
+    "envelope_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "route": { "type": "string" },
+    "state_before": { "type": "string" },
+    "authorised_action": { "type": "string" },
+    "state_after": { "type": "string" },
+    "duration_ms": { "type": "number", "minimum": 0, "description": "Duration only, as approved — not a wall-clock personal timestamp." },
+    "error_or_fallback_code": { "type": ["string", "null"] },
+    "accessibility_mode": { "type": ["string", "null"], "description": "Only if voluntarily and safely captured; never a disability identity." },
+    "purpose": { "enum": ["research", "operational"] },
+    "retention_class": { "enum": ["transient", "session", "approved_research", "operational_audit"] }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "_comment": "AI-ASSISTED SCAFFOLD from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md §12.2/§12.3/§12.6/§12.7/§12.9/§12.10 (C-15). NOT authorship evidence. Clarence prepares the ethics evidence pack; the Bristol PGT ethics route decides (RATIFY-15-03). No human-effect claim without approval.",
+  "version": "0.1.0-PROPOSED",
+  "status": "PROPOSED",
+
+  "intended_use": [
+    "evidence-bounded discovery of published activity listings",
+    "user-controlled refinement and inspection",
+    "provider-controlled contact/link handoff",
+    "staff diagnosis of acquisition-to-interface mechanisms",
+    "governed drafting of bounded actions",
+    "research evaluation within the approved route"
+  ],
+  "prohibited_use": [
+    "emergency, clinical, diagnosis, prescribing or safeguarding decision",
+    "eligibility determination",
+    "autonomous booking, payment, referral or contact",
+    "inference of sensitive characteristics",
+    "persistent behavioural profiling by default",
+    "staff performance surveillance",
+    "publisher enforcement or league tables",
+    "automatic acceptance of model or staff-assistant recommendations",
+    "reuse of research or operational data for a new purpose without review"
+  ],
+
+  "activity_matrix": [
+    { "activity": "synthetic/unit/fixture testing", "default_position": "ordinary development", "gate": "minimise logs; retain system outcomes", "fallback": "n/a", "human_participant": false, "requires_ethics_route": false },
+    { "activity": "internal team walkthrough", "default_position": "governance review", "gate": "do not publish member reactions as participant evidence", "fallback": "treat as supervision, exclude from analysis", "human_participant": false, "requires_ethics_route": false },
+    { "activity": "expert accessibility inspection", "default_position": "may involve people/data", "gate": "obtain required determination", "fallback": "report technical inspection only", "human_participant": true, "requires_ethics_route": true },
+    { "activity": "public application study", "default_position": "human-participant research", "gate": "favourable Bristol PGT route before collection", "fallback": "no usability/effect claim; deterministic + accessibility evidence only", "human_participant": true, "requires_ethics_route": true },
+    { "activity": "staff/practitioner study", "default_position": "human-participant/organisational data", "gate": "approved route + recruitment/consent", "fallback": "expert walkthrough only", "human_participant": true, "requires_ethics_route": true },
+    { "activity": "children / NHS-linked / safeguarding context", "default_position": "elevated risk", "gate": "separate explicit route", "fallback": "exclude if not authorised", "human_participant": true, "requires_ethics_route": true },
+    { "activity": "live public telemetry", "default_position": "service/research personal-data risk", "gate": "no collection until purposes, notice, retention and approval established (DPIA, C-13)", "fallback": "no collection; deterministic evidence only", "human_participant": true, "requires_ethics_route": true }
+  ],
+
+  "responsible_ai_requirements": [
+    "identify the system as automated and bounded",
+    "set accurate expectations about catalogue, freshness and scope",
+    "confirm high-consequence constraints",
+    "make uncertainty and abstention actionable",
+    "provide edit, challenge, correction and human/assisted routes",
+    "avoid anthropomorphic authority and persuasion",
+    "measure reliance, not merely satisfaction",
+    "prohibit dark patterns, forced disclosure and attention capture",
+    "expose why a question is asked and allow skip where safe",
+    "never hide a deterministic option to manufacture chatbot engagement",
+    "preserve human approval for staff/external actions"
+  ],
+
+  "maturity_states": ["research_demonstration", "public_safe_demonstration", "staff_shadow_mode", "controlled_partner_pilot"],
+  "non_compensatory": "Passing one maturity gate never authorises the next; a favourable score elsewhere cannot offset a failed ethics, privacy, threat, disclosure, supplier, resilience, interaction, assurance-integrity or maturity gate. 'public_safe_demonstration' is a maturity-state name, not an unqualified safety claim.",
+
+  "incident_controls": [
+    "detector and alert", "affected surfaces/claims", "immediate safe mode or kill switch",
+    "owner and decision authority", "evidence preservation", "notification/escalation route",
+    "rollback/restore procedure", "correction/replay scope", "restart criteria", "post-incident learning record"
+  ],
+
+  "no_study_fallback": "If ethics/recruitment/readiness fails: retain deterministic conformance, accessibility/AT, semantic-replay / non-interference / security tests; remove public-usability, practitioner-actionability, organisational-effectiveness and lived-equity claims (WP §13.5)."
+}

@@ -1,0 +1,247 @@
+{
+  "action_kind": "discovery_decision",
+  "header": {
+    "release_maturity_class": "research_demonstration"
+  },
+  "payload": {
+    "decision": {
+      "contract": "DecisionEnvelope",
+      "schema_version": "0.2.0-PROPOSED",
+      "identity": {
+        "episode_id": "ep-corpus-001",
+        "turn_id": 1,
+        "request_id": "req-corpus-001",
+        "trace_id": "tr-corpus-001"
+      },
+      "versions": {
+        "corpus_version": "V2026-08-27-DEV",
+        "interpretation_version": "interp-1.2",
+        "verifier_version": "ver-1.0",
+        "vintage": "2026-08-27"
+      },
+      "terminal_decision": "supported_match",
+      "scope_qualifier": "scope_complete",
+      "coverage_qualifier": {
+        "acquisition_complete": true,
+        "statement": "Of 12 records gated from Oxford_University in corpus V2026-08-27, none outside this set was evaluated. A bounded non-match means no gated candidate satisfied the constraints, not that no matching activity exists.",
+        "unevaluated_feeds": 0
+      },
+      "recommendation_action": "authorised_slate",
+      "predicates": [
+        {
+          "predicate_id": "name",
+          "evidence_state": "T",
+          "grade": "explicit",
+          "provenance": "inherited_from_parent"
+        },
+        {
+          "predicate_id": "startDate",
+          "evidence_state": "T",
+          "grade": "explicit",
+          "provenance": "on_record"
+        }
+      ],
+      "candidates": [
+        {
+          "candidate_id": "https://oxforduniversity.leisurecloud.net/OpenActive/api/scheduled-sessions/11167631",
+          "rank": 1,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "name",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "inherited_from_parent"
+            },
+            {
+              "predicate_id": "startDate",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "on_record"
+            }
+          ]
+        },
+        {
+          "candidate_id": "https://oxforduniversity.leisurecloud.net/OpenActive/api/scheduled-sessions/11167646",
+          "rank": 2,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "name",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "inherited_from_parent"
+            },
+            {
+              "predicate_id": "startDate",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "on_record"
+            }
+          ]
+        },
+        {
+          "candidate_id": "https://oxforduniversity.leisurecloud.net/OpenActive/api/scheduled-sessions/11167661",
+          "rank": 3,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "name",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "inherited_from_parent"
+            },
+            {
+              "predicate_id": "startDate",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "on_record"
+            }
+          ]
+        },
+        {
+          "candidate_id": "https://oxforduniversity.leisurecloud.net/OpenActive/api/scheduled-sessions/11167677",
+          "rank": 4,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "name",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "inherited_from_parent"
+            },
+            {
+              "predicate_id": "startDate",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "on_record"
+            }
+          ]
+        },
+        {
+          "candidate_id": "https://oxforduniversity.leisurecloud.net/OpenActive/api/scheduled-sessions/11167693",
+          "rank": 5,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "name",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "inherited_from_parent"
+            },
+            {
+              "predicate_id": "startDate",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "on_record"
+            }
+          ]
+        },
+        {
+          "candidate_id": "https://oxforduniversity.leisurecloud.net/OpenActive/api/scheduled-sessions/11167707",
+          "rank": 6,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "name",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "inherited_from_parent"
+            },
+            {
+              "predicate_id": "startDate",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "on_record"
+            }
+          ]
+        },
+        {
+          "candidate_id": "https://oxforduniversity.leisurecloud.net/OpenActive/api/scheduled-sessions/11167723",
+          "rank": 7,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "name",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "inherited_from_parent"
+            },
+            {
+              "predicate_id": "startDate",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "on_record"
+            }
+          ]
+        },
+        {
+          "candidate_id": "https://oxforduniversity.leisurecloud.net/OpenActive/api/scheduled-sessions/11167738",
+          "rank": 8,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "name",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "inherited_from_parent"
+            },
+            {
+              "predicate_id": "startDate",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "on_record"
+            }
+          ]
+        },
+        {
+          "candidate_id": "https://oxforduniversity.leisurecloud.net/OpenActive/api/scheduled-sessions/11167752",
+          "rank": 9,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "name",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "inherited_from_parent"
+            },
+            {
+              "predicate_id": "startDate",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "on_record"
+            }
+          ]
+        },
+        {
+          "candidate_id": "https://oxforduniversity.leisurecloud.net/OpenActive/api/scheduled-sessions/11167771",
+          "rank": 10,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "name",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "inherited_from_parent"
+            },
+            {
+              "predicate_id": "startDate",
+              "evidence_state": "T",
+              "grade": "explicit",
+              "provenance": "on_record"
+            }
+          ]
+        }
+      ],
+      "claims": [],
+      "why_not": [
+        {
+          "predicate_id": "name",
+          "blocking_state": "F",
+          "relaxation_suggestion": "Try a different name, or widen the search."
+        }
+      ],
+      "digest": "sha256:7abd152c39f60530b4c011c6759c2b95d60f76c4f5cf790a5f3286667f22a9b9"
+    }
+  }
+}

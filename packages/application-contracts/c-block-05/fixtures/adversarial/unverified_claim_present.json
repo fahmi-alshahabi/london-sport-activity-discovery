@@ -1,0 +1,191 @@
+{
+  "action_kind": "discovery_decision",
+  "header": {
+    "episode_id": "ep-7731",
+    "turn_id": 3,
+    "request_id": "req-55021",
+    "trace_id": "trace-aa19",
+    "schema_version": "0.1.0",
+    "compatible_release_version": "app-0.1.0",
+    "state_transition": {
+      "from_state": "query_review",
+      "to_state": "discovery_decision",
+      "previous_envelope_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "coarsened_origin": "LB Croydon",
+    "confirmed_requirements": [
+      "activity=swimming",
+      "access=step_free"
+    ],
+    "release_maturity_class": "research_demonstration",
+    "latency_ms": 812,
+    "failure_state": null,
+    "safety_gate_state": "passed"
+  },
+  "payload": {
+    "decision": {
+      "contract": "DecisionEnvelope",
+      "schema_version": "0.1.0",
+      "identity": {
+        "episode_id": "ep-7731",
+        "turn_id": 3,
+        "request_id": "req-55021",
+        "trace_id": "trace-aa19"
+      },
+      "versions": {
+        "corpus_version": "H1-2026-06-30",
+        "interpretation_version": "interp-1.2",
+        "search_horizon_version": "hz-2026Q3",
+        "model_version": "recmodel-0.3",
+        "policy_version": "explicit-three-state",
+        "verifier_version": "ver-1.0",
+        "vintage": "2026-06-30"
+      },
+      "terminal_decision": "supported_match",
+      "scope_qualifier": "scope_complete",
+      "coverage_qualifier": {
+        "acquisition_complete": true,
+        "statement": "All 5 selected Croydon feeds acquired to live edge on 2026-06-30.",
+        "unevaluated_feeds": 0
+      },
+      "recommendation_action": "authorised_slate",
+      "predicates": [
+        {
+          "predicate_id": "activity=swimming",
+          "evidence_state": "T",
+          "grade": "explicit",
+          "receipts": [
+            {
+              "receipt_id": "r-a1",
+              "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+            }
+          ]
+        },
+        {
+          "predicate_id": "access=step_free",
+          "evidence_state": "T",
+          "grade": "explicit",
+          "receipts": [
+            {
+              "receipt_id": "r-a2",
+              "content_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+            }
+          ]
+        },
+        {
+          "predicate_id": "price",
+          "evidence_state": "U",
+          "mechanism": "source_absence",
+          "grade": "specification_default",
+          "lineage_note": "price absent on SessionSeries; no offer node published"
+        }
+      ],
+      "candidates": [
+        {
+          "candidate_id": "sess-101",
+          "rank": 1,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "activity=swimming",
+              "evidence_state": "T",
+              "grade": "explicit"
+            },
+            {
+              "predicate_id": "access=step_free",
+              "evidence_state": "T",
+              "grade": "explicit"
+            },
+            {
+              "predicate_id": "price",
+              "evidence_state": "U",
+              "mechanism": "source_absence",
+              "grade": "specification_default"
+            }
+          ],
+          "provider_link": "https://example.org/sessions/101",
+          "internal_score": 0.82
+        },
+        {
+          "candidate_id": "sess-102",
+          "rank": 2,
+          "pool": "supported",
+          "attributes": [
+            {
+              "predicate_id": "activity=swimming",
+              "evidence_state": "T",
+              "grade": "explicit"
+            },
+            {
+              "predicate_id": "access=step_free",
+              "evidence_state": "T",
+              "grade": "explicit"
+            },
+            {
+              "predicate_id": "price",
+              "evidence_state": "U",
+              "mechanism": "source_absence",
+              "grade": "specification_default"
+            }
+          ],
+          "provider_link": "https://example.org/sessions/102",
+          "internal_score": 0.77
+        }
+      ],
+      "why_not": [],
+      "claims": [
+        {
+          "claim_type": "match_cardinality",
+          "subject": "query",
+          "predicate": "supported_count",
+          "value": 2,
+          "receipt_ids": [
+            "r-a1"
+          ],
+          "evidence_grade": "explicit",
+          "qualifiers": [],
+          "verification": "verified"
+        },
+        {
+          "claim_type": "listing_attribute",
+          "subject": "sess-101",
+          "predicate": "activity=swimming",
+          "value": true,
+          "receipt_ids": [
+            "r-a1"
+          ],
+          "evidence_grade": "explicit",
+          "qualifiers": [],
+          "verification": "verified"
+        },
+        {
+          "claim_type": "uncertainty",
+          "subject": "sess-101",
+          "predicate": "price",
+          "value": null,
+          "receipt_ids": [
+            "r-a1"
+          ],
+          "evidence_grade": "specification_default",
+          "qualifiers": [
+            "price not published"
+          ],
+          "verification": "verified"
+        },
+        {
+          "claim_type": "listing_attribute",
+          "subject": "sess-102",
+          "predicate": "activity=swimming",
+          "value": true,
+          "receipt_ids": [
+            "r-a1"
+          ],
+          "evidence_grade": "explicit",
+          "qualifiers": [],
+          "verification": "failed"
+        }
+      ],
+      "digest": "sha256:b5652d9d474bd9198dc014ed9842f22c09de33a023e9f69d6c52cf93c78dd334"
+    }
+  }
+}
