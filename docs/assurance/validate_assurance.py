@@ -44,7 +44,12 @@ def detect_orphans(claim, registry):
 def run_test(tid, spec):
     cmd = spec["command"]
     try:
-        r = subprocess.run(shlex.split(cmd), cwd=REPO, capture_output=True, text=True, timeout=180)
+        args = shlex.split(cmd)
+        if args and args[0] in ("python", "python3"):
+            args[0] = sys.executable  # use the current interpreter (python3 may not exist on Windows)
+        env = dict(os.environ, PYTHONIOENCODING="utf-8")
+        r = subprocess.run(args, cwd=REPO, capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=180, env=env)
         out = r.stdout + r.stderr
         ok = r.returncode == 0 and spec.get("expect", "") in out
         return ok, ("pass" if ok else f"FAIL (rc={r.returncode})")
@@ -85,7 +90,7 @@ def render(model, results, verdicts):
 
 
 def main():
-    model = json.load(open(SRC))
+    model = json.load(open(SRC, encoding="utf-8"))
     registry = model["test_registry"]
 
     # run each referenced test once
@@ -123,7 +128,7 @@ def main():
               f"{'green' if not failing else 'RED'}; verdict={verdict}"
               + ("" if not blockers else f" (blocked: {'; '.join(blockers)})"))
 
-    with open(OUT, "w") as fh:
+    with open(OUT, "w", encoding="utf-8") as fh:
         fh.write(render(model, results, verdicts))
 
     authorised = sum(1 for v in verdicts.values() if not v["blockers"])

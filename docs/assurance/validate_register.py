@@ -101,7 +101,7 @@ def render(reg):
 
 
 def main():
-    reg = json.load(open(SRC))
+    reg = json.load(open(SRC, encoding="utf-8"))
     errs = validate(reg)
     if errs:
         print("REGISTER INVALID:")
@@ -109,7 +109,7 @@ def main():
             print("  -", e)
         return 1
     md = render(reg)
-    with open(OUT, "w") as fh:
+    with open(OUT, "w", encoding="utf-8") as fh:
         fh.write(md)
     rows = reg["rows"]
     print(f"REGISTER OK: {len(rows)} blockers, all C-BLOCK-01..15 present, no blank cells.")
